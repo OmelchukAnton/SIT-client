@@ -1,0 +1,42 @@
+.homepage__body {
+    height: 100%;
+    background-color: #01B8A4;
+    color: white;
+
+    .greeting {
+        padding-top: 30px;
+        text-align: center;
+        font-size: 40px;
+    }
+    .greeting__info {
+        padding-left: 60%;
+        font-size: 25px;
+        margin: 20px 0;
+    }
+
+    .about_app {
+        columns: 2;
+        background-color: #305075;
+
+        .left_side {
+            border: 1px dotted grey;
+
+            .first_picture {
+                border-radius: 100px; /* Радиус скругления */
+                box-shadow: 0 0 0 3px yellow, 0 0 13px #333; /* Параметры теней */
+                transform: rotate(-50deg);
+                margin-bottom: 70px;
+            }
+            .second_picture {
+                margin-top: 50px;
+                margin-bottom: 50px;
+                border-radius: 50px;
+                border: 3px solid silver; /* Параметры рамки */
+                transform: rotate(15deg);
+            }
+        }
+        .button__goto_registration {
+            
+        }
+    }
+}

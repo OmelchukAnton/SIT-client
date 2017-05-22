@@ -1,0 +1,63 @@
+.header__registration {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    display: flex;
+
+    .logo {
+        padding: 30px;
+    }
+
+    .sign__switching {
+        button {
+            margin: 20px;
+            width: 70px;
+            height: 40px;
+        }
+    }
+}
+
+.form__login {
+    display: flex;
+    justify-content: flex-end;
+
+    .location__inform {
+        display: flex;
+
+        .location__fields {
+            display: flex;
+            padding-bottom: 10px;
+
+            .input__email {
+                margin-left: 43px;
+            }
+
+            .input__password {
+                margin-left: 20px;
+            }
+        }
+
+        .button__login {
+            margin-left: 20px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
+}
+
+
+.form_create_account {
+    text-align: center;
+
+    .field_group {
+
+        .inputs_group {
+            margin: 10px 0 10px 10px;
+            width: 300px;
+            height: 30px;
+        }
+    }
+    .button_create_account {
+        padding-left: 320px;
+    }
+}

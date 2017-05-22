@@ -1,0 +1,39 @@
+.Navigation__over_contacts {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+
+    background-color: #0F6FA9;
+    height: 100px;
+    color: white;
+
+    .name_app {
+        display: inline-flex;
+        flex-grow: 1;
+        margin-left: 30px;
+
+    }
+
+    .action_nav {
+        display: flex;
+
+    }
+
+    .search_users {
+        border: none;
+        padding-left: 10px;
+        border-radius: 20px;
+        background-color: #036;
+        outline: none;
+
+        &:focus {
+          background: #E8E8E8;
+        }
+    }
+
+    .dropdown_list {
+        margin: 0 30px;
+        font-weight: bolder;
+        transform: rotate(-90deg);
+    }
+}

@@ -1,0 +1,44 @@
+.contacts__list {
+    .info__users {
+        height: 77%;
+        overflow: auto;
+        // border: 1px dotted grey;
+
+        .selected__user {
+            &:active{
+                box-shadow: 2px 0px 10px blue;
+            }
+        }
+    }
+}
+
+
+.view__contact {
+    margin-top: 10px;
+    .profile__contact {
+        display: flex;
+    	font-family: arial, sans-serif;
+    	padding: 5px;
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+        	border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .name {
+        	font-size: 20px;
+        }
+
+        .time {
+        	font-size: 12px;
+        	color: grey;
+        }
+
+        .message {
+            font-size: 17px;
+        	color: grey;
+        }
+    }
+}
