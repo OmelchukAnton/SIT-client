@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login.jsx';
 import CreateAccount from './CreateAccount.jsx';
-import Valid from './Valid.jsx';
+import './Valid.jsx';
 
 import './RegLog.scss';
 
@@ -45,7 +45,7 @@ export default class RegistrationPage extends Component {
             alt="example-logo"
             className="logo"
           />
-          <a className="logo" href="/">timekeeping</a>
+          <a className="logo" href="/">Stay in touch!</a>
           <div className="sign__switching">{button}</div>
 
         </div>

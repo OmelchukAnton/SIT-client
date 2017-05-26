@@ -1,15 +1,16 @@
 import React from 'react';
-import Validation from 'react-validation';
+// import Validation from 'react-validation';
+import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
 
 
 const CreateAccount = () => (
   <main className="form_create_account">
-    <Validation.components.Form>
+    <Form>
       <h3>Registration</h3>
       <label htmlFor="firstname" className="field_group">
         Firstname*
-        <Validation.components.Input
+        <Input
           className="inputs_group"
           errorClassName="is-invalid-input"
           type="text"
@@ -21,7 +22,7 @@ const CreateAccount = () => (
       </label>
       <label htmlFor="lastname" className="field_group">
         Lastname*
-        <Validation.components.Input
+        <Input
           className="inputs_group"
           errorClassName="is-invalid-input"
           type="text"
@@ -33,7 +34,7 @@ const CreateAccount = () => (
       </label>
       <label htmlFor="city" className="field_group">
         City*
-        <Validation.components.Select
+        <Select
           className="inputs_group"
           errorClassName="is-invalid-input"
           name="city"
@@ -44,11 +45,11 @@ const CreateAccount = () => (
           <option value="1">Brest</option>
           <option value="2">Minsk</option>
           <option value="3">New York</option>
-        </Validation.components.Select>
+        </Select>
       </label>
       <label htmlFor="email" className="field_group">
         Email*
-        <Validation.components.Input
+        <Input
           className="inputs_group"
           value="email@email.com"
           name="email"
@@ -57,7 +58,7 @@ const CreateAccount = () => (
       </label>
       <label htmlFor="password" className="field_group">
         Password*
-        <Validation.components.Input
+        <Input
           className="inputs_group"
           type="password"
           value=""
@@ -67,7 +68,7 @@ const CreateAccount = () => (
       </label>
       <label htmlFor="confirm" className="field_group">
         Confirm password*
-        <Validation.components.Input
+        <Input
           className="inputs_group"
           type="password"
           errorClassName="is-invalid-input"
@@ -78,9 +79,9 @@ const CreateAccount = () => (
         />
       </label>
       <Link to="/pm" className="button_create_account">
-        <Validation.components.Button>Submit</Validation.components.Button>
+        <Button>Submit</Button>
       </Link>
-    </Validation.components.Form>
+    </Form>
   </main>
 );
 export default CreateAccount;

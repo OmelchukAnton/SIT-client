@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import ContactList from './contacts/ContactList.jsx';
-import Navigation from './contacts/navigation/Navigation.jsx';
-import ChatWindow from './contacts/chatBody/ChatWindow.jsx';
+import Navigation from './navigation/Navigation.jsx';
+import ChatWindow from './chatBody/ChatWindow.jsx';
 import getContacts from '../services/contacts.js';
 
 

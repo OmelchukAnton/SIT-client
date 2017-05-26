@@ -5,7 +5,7 @@ import { BrowserHistory } from 'react-history';
 import App from './components/App.jsx';
 import MainPage from './components/homepage/MainPage.jsx';
 import RegistrationPage from './components/registration/RegistrationPage.jsx';
-import Messanges from './components/contacts/chatBody/Messanges.jsx';
+import Messanges from './components/chatBody/Messanges.jsx';
 
 import './index.scss';
 

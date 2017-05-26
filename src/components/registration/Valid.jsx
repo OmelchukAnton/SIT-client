@@ -1,8 +1,8 @@
 import React from 'react';
-import Validation from 'react-validation';
+import { rules } from 'react-validation/lib/build/validation.rc';
 import validator from 'validator';
 
-Object.assign(Validation.rules, {
+Object.assign(rules, {
   required: {
     rule: value => value.toString().trim(),
     hint: () => <span className="form-error is-visible"> <br /> Required</span>,

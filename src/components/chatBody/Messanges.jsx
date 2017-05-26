@@ -2,7 +2,6 @@ import React from 'react';
 import './Chats.scss';
 
 export default function Messanges(props) {
-
   return (
     <div className="chat__content">
       <div className="chat__design">
