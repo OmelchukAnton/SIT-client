@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Login from './Login.jsx';
-import CreateAccount from './CreateAccount.jsx';
+import Login from '../login/Login.jsx';
+// import Log from '../login/Log.jsx';
+import CreateAccount from '../createUsers/CreateAccount.jsx';
 import './Valid.jsx';
 
 import './RegLog.scss';

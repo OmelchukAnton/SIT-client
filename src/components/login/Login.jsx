@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => (
-  <form className="form__login">
+  <div className="form__login">
     <fieldset>
       <legend>Log in</legend>
       <Form className="location__inform">
@@ -27,6 +27,6 @@ const Login = () => (
         </div>
       </Form>
     </fieldset>
-  </form>
+  </div>
 );
 export default Login;

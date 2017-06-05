@@ -20,6 +20,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // getContacts().then(data => console.log(data));
     getContacts().then((data) => {
       this.setState({
         contacts: data,
