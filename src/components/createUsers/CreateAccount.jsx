@@ -1,4 +1,3 @@
-// import React from 'react';
 import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
