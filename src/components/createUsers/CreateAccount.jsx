@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
+import { newContact } from '../../services/contacts.js';
+
 
 export default class CreateAccount extends Component {
   constructor(props) {
@@ -19,6 +21,22 @@ export default class CreateAccount extends Component {
     this.handleCityTick = this.handleCityTick.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
+    this.onAddNewContact = this.onAddNewContact.bind(this);
+  }
+
+    // newContact({firstname:'Anton'}).then(response => console.log(response));
+  // componentDidMount () {
+  //   newContact({ firstname: name }).then(response => console.log(response));
+  // }
+
+  onAddNewContact() {
+    console.log(this.state);
+    // newContact({firstname: this.state.firstname, lastname: this.state.lastname});
+    // newContact().then((prevState) => {
+    //   this.setState({
+    //     contacts: [...prevState.contacts, { name }],
+    //   });
+    // });
   }
 
   handleFirstnameInput(e) {
@@ -143,9 +161,9 @@ export default class CreateAccount extends Component {
               validations={['required', 'password']}
             />
           </label>
-          <Link to="/pm" className="button_create_account">
-            <Button>Submit</Button>
-          </Link>
+          {/* <Link to="/pm" className="button_create_account"> */}
+            <Button onClick={this.onAddNewContact}>Submit</Button>
+          {/* </Link> */}
         </Form>
       </main>
     );

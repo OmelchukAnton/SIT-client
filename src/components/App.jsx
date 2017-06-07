@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ContactList from './contacts/ContactList.jsx';
 import Navigation from './navigation/Navigation.jsx';
 import ChatWindow from './chatBody/ChatWindow.jsx';
-import getContacts from '../services/contacts.js';
+import { getContacts } from '../services/contacts.js';
 
 
 import './App.scss';
