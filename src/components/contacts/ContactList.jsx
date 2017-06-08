@@ -41,14 +41,14 @@ export default class ContactList extends Component {
       <div className="contacts__list">
         <div className="info__users">
           {this.props.contacts.map( // TODO: вынести в отдельный метод
-            contact =>
-              <div className="selected__user">
+            (contact, i) =>
+              <div className="selected__user" key={i}>
                 <Link to={`/pm/${contact.name}`}>
                   <Contact
                     name={contact.name}
                     avatar={contact.avatar}
                     message={contact.message}
-                    time={contact.time}
+                    time={(contact.time || '').toString()}
                     contact={contact}
                     key={contact.id}
                     onClick={this.handleItemClick}
@@ -71,10 +71,10 @@ export default class ContactList extends Component {
   }
 }
 ContactList.propTypes = {
-  contacts: React.PropTypes.string,
+  contacts: React.PropTypes.array,
   onAddChange: React.PropTypes.func.isRequired,
   onItemClick: React.PropTypes.func.isRequired,
 };
 ContactList.defaultProps = {
-  contacts: '',
+  contacts: [],
 };

@@ -16,69 +16,20 @@ export default class CreateAccount extends Component {
       password: '',
     };
 
-    this.handleFirstnameInput = this.handleFirstnameInput.bind(this);
-    this.handleLastnameInput = this.handleLastnameInput.bind(this);
-    this.handleCityTick = this.handleCityTick.bind(this);
-    this.handleEmailInput = this.handleEmailInput.bind(this);
-    this.handlePasswordInput = this.handlePasswordInput.bind(this);
-    this.onAddNewContact = this.onAddNewContact.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onAddNewAccount = this.onAddNewAccount.bind(this);
   }
 
-    // newContact({firstname:'Anton'}).then(response => console.log(response));
-  // componentDidMount () {
-  //   newContact({ firstname: name }).then(response => console.log(response));
-  // }
 
-  onAddNewContact() {
-    console.log(this.state);
-    // newContact({firstname: this.state.firstname, lastname: this.state.lastname});
-    // newContact().then((prevState) => {
-    //   this.setState({
-    //     contacts: [...prevState.contacts, { name }],
-    //   });
-    // });
+  onAddNewAccount() {
+    newContact(this.state).then(response => console.log(response));
   }
 
-  handleFirstnameInput(e) {
-    const firstname = e.target.value;
-
+  handleInputChange(event) {
     this.setState({
-      firstname,
+      [event.target.name]: event.target.value,
     });
   }
-
-  handleLastnameInput(e) {
-    const lastname = e.target.value;
-
-    this.setState({
-      lastname,
-    });
-  }
-
-  handleCityTick(e) {
-    const city = e.target.value;
-
-    this.setState({
-      city,
-    });
-  }
-
-  handleEmailInput(e) {
-    const email = e.target.value;
-
-    this.setState({
-      email,
-    });
-  }
-
-  handlePasswordInput(e) {
-    const password = e.target.value;
-
-    this.setState({
-      password,
-    });
-  }
-
 
   newContact() {
     return (
@@ -93,7 +44,7 @@ export default class CreateAccount extends Component {
               type="text"
               containerClassName=""
               value=""
-              onChange={this.handleFirstnameInput}
+              onChange={this.handleInputChange}
               name="firstname"
               validations={['required', 'alpha']}
             />
@@ -106,7 +57,7 @@ export default class CreateAccount extends Component {
               type="text"
               containerClassName=""
               value=""
-              onChange={this.handleLastnameInput}
+              onChange={this.handleInputChange}
               name="lastname"
               validations={['required', 'alpha']}
             />
@@ -132,7 +83,7 @@ export default class CreateAccount extends Component {
             <Input
               className="inputs_group"
               value="email@email.com"
-              onChange={this.handleEmailInput}
+              onChange={this.handleInputChange}
               name="email"
               validations={['required', 'email']}
             />
@@ -143,7 +94,7 @@ export default class CreateAccount extends Component {
               className="inputs_group"
               type="password"
               value=""
-              onChange={this.handlePasswordInput}
+              onChange={this.handleInputChange}
               name="password"
               validations={['required']}
             />
@@ -156,14 +107,14 @@ export default class CreateAccount extends Component {
               errorClassName="is-invalid-input"
               containerClassName=""
               value=""
-              onChange={this.handlePasswordInput}
+              onChange={this.handleInputChange}
               name="passwordConfirm"
               validations={['required', 'password']}
             />
           </label>
-          {/* <Link to="/pm" className="button_create_account"> */}
-            <Button onClick={this.onAddNewContact}>Submit</Button>
-          {/* </Link> */}
+          <Link to="/pm" className="button_create_account">
+            <Button onClick={this.onAddNewAccount}>Submit</Button>
+          </Link>
         </Form>
       </main>
     );
@@ -171,8 +122,6 @@ export default class CreateAccount extends Component {
   render() {
     return (
       <div>
-        {/* {console.log(1)} */}
-        {/* {console.log(this.newContact())} */}
         {this.newContact()}
       </div>
     );

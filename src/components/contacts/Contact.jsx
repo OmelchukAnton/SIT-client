@@ -9,7 +9,7 @@ export default class Contact extends Component {
   }
 
   handleItemClick() {
-    this.props.onClick(this.props.contact);
+    this.props.onClick(this.props.name);
   }
 
   render() {
@@ -36,7 +36,6 @@ Contact.propTypes = {
   name: React.PropTypes.string,
   message: React.PropTypes.string,
   time: React.PropTypes.string,
-  contact: React.PropTypes.string,
   onClick: React.PropTypes.func.isRequired,
 };
 Contact.defaultProps = {
@@ -44,5 +43,4 @@ Contact.defaultProps = {
   name: '',
   message: '',
   time: '',
-  contact: '',
 };
