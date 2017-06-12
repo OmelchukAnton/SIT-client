@@ -36,84 +36,97 @@ export default class CreateAccount extends Component {
       <main className="form_create_account">
         <Form>
           <h3>Registration</h3>
+          <p className="required">*All fields are required.</p>
           <label htmlFor="firstname" className="field_group">
-            Firstname*
-            <Input
-              className="inputs_group"
-              errorClassName="is-invalid-input"
-              type="text"
-              containerClassName=""
-              value=""
-              onChange={this.handleInputChange}
-              name="firstname"
-              validations={['required', 'alpha']}
-            />
+            <div className="blocks">
+              Firstname:
+              <Input
+                className="inputs_group"
+                errorClassName="is-invalid-input"
+                type="text"
+                containerClassName=""
+                value=""
+                onChange={this.handleInputChange}
+                name="firstname"
+                validations={['required', 'alpha']}
+              />
+            </div>
           </label>
           <label htmlFor="lastname" className="field_group">
-            Lastname*
-            <Input
-              className="inputs_group"
-              errorClassName="is-invalid-input"
-              type="text"
-              containerClassName=""
-              value=""
-              onChange={this.handleInputChange}
-              name="lastname"
-              validations={['required', 'alpha']}
-            />
+            <div className="blocks">
+              Lastname:
+              <Input
+                className="inputs_group"
+                errorClassName="is-invalid-input"
+                type="text"
+                containerClassName=""
+                value=""
+                onChange={this.handleInputChange}
+                name="lastname"
+                validations={['required', 'alpha']}
+              />
+            </div>
           </label>
           <label htmlFor="city" className="field_group">
-            City*
-            <Select
-              className="inputs_group"
-              errorClassName="is-invalid-input"
-              name="city"
-              value=""
-              onChange={this.handleCityTick}
-              validations={['required']}
-            >
-              <option value="">Choose your city</option>
-              <option value="1">Brest</option>
-              <option value="2">Minsk</option>
-              <option value="3">New York</option>
-            </Select>
+            <div className="blocks">
+              City:
+              <Select
+                className="inputs_group"
+                errorClassName="is-invalid-input"
+                name="city"
+                value=""
+                onChange={this.handleCityTick}
+                validations={['required']}
+              >
+                <option value="">Choose your city</option>
+                <option value="1">Brest</option>
+                <option value="2">Minsk</option>
+                <option value="3">New York</option>
+              </Select>
+            </div>
           </label>
           <label htmlFor="email" className="field_group">
-            Email*
-            <Input
-              className="inputs_group"
-              value="email@email.com"
-              onChange={this.handleInputChange}
-              name="email"
-              validations={['required', 'email']}
-            />
+            <div className="blocks">
+              Email:
+              <Input
+                className="inputs_group"
+                value="email@email.com"
+                onChange={this.handleInputChange}
+                name="email"
+                validations={['required', 'email']}
+              />
+            </div>
           </label>
           <label htmlFor="password" className="field_group">
-            Password*
-            <Input
-              className="inputs_group"
-              type="password"
-              value=""
-              onChange={this.handleInputChange}
-              name="password"
-              validations={['required']}
-            />
+            <div className="blocks">
+              Password:
+              <Input
+                className="inputs_group"
+                type="password"
+                value=""
+                onChange={this.handleInputChange}
+                name="password"
+                validations={['required']}
+              />
+            </div>
           </label>
           <label htmlFor="confirm" className="field_group">
-            Confirm password*
-            <Input
-              className="inputs_group"
-              type="password"
-              errorClassName="is-invalid-input"
-              containerClassName=""
-              value=""
-              onChange={this.handleInputChange}
-              name="passwordConfirm"
-              validations={['required', 'password']}
-            />
+            <div className="blocks">
+            Confirm password:
+              <Input
+                className="inputs_group"
+                type="password"
+                errorClassName="is-invalid-input"
+                containerClassName=""
+                value=""
+                onChange={this.handleInputChange}
+                name="passwordConfirm"
+                validations={['required', 'password']}
+              />
+            </div>
           </label>
           <Link to="/pm" className="button_create_account">
-            <Button onClick={this.onAddNewAccount}>Submit</Button>
+            <Button onClick={this.onAddNewAccount}> Create an account. </Button>
           </Link>
         </Form>
       </main>

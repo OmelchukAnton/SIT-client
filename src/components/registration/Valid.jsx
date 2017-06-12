@@ -5,14 +5,14 @@ import validator from 'validator';
 Object.assign(rules, {
   required: {
     rule: value => value.toString().trim(),
-    hint: () => <span className="form-error is-visible"> <br /> Required</span>,
+    hint: () => <span className="form-error is-visible"> <br /> Required </span>,
   },
 
   email: {
     rule: value => validator.isEmail(value),
     hint: value =>
       <span className="form-error is-visible">
-        <br /> {value} - is not an Email.
+         <br /> {value} - is not an Email.
       </span>,
   },
   alpha: {
@@ -38,13 +38,13 @@ Object.assign(rules, {
 
       return password.value === passwordConfirm.value;
     },
-    hint: () => <span className="form-error is-visible"> <br /> Passwords should be equal.</span>,
+    hint: () => <span className="form-error is-visible"> <br /> Passwords should be equal. </span>,
     api: {
       hint: value => (
         <button
           className="form-error is-visible"
         >
-          <br /> API Error on {value} value. Focus to hide.
+          API Error on {value} value. Focus to hide.
         </button>
       ),
     },

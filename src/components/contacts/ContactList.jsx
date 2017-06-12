@@ -43,9 +43,10 @@ export default class ContactList extends Component {
           {this.props.contacts.map( // TODO: вынести в отдельный метод
             (contact, i) =>
               <div className="selected__user" key={i}>
-                <Link to={`/pm/${contact.name}`}>
+                <Link to={`/pm/${contact.firstname}`}>
                   <Contact
-                    name={contact.name}
+                    name={contact.firstname + " " + contact.lastname}
+                    // lastname={contact.name}
                     avatar={contact.avatar}
                     message={contact.message}
                     time={(contact.time || '').toString()}
