@@ -47,7 +47,7 @@ export default class App extends Component {
   handleSearch(value) {
     const { contacts } = this.state;
     const filtered = contacts.filter(
-    contact => contact.name.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+    contact => contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
     );
 
     this.setState({

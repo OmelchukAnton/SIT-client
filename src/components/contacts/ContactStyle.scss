@@ -1,12 +1,32 @@
-.contacts__list {
-    .info__users {
-        height: 77%;
+.block {
+    .contacts__list {
         overflow: auto;
-        // border: 1px dotted grey;
 
-        .selected__user {
-            &:active{
-                box-shadow: 2px 0px 10px blue;
+        .info__users {
+            height: 60%;
+            // border: 1px dotted grey;
+            align-items: flex-end;
+            .selected__user {
+                &:active{
+                    box-shadow: 2px 0px 10px blue;
+                }
+            }
+        }
+        .position_add_contact {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            .circle {
+                position: absolute;
+        		width: 60px;
+         		height: 60px;
+         		border-radius: 50px;
+                background-color: red;
+         		font-size: 35px;
+         		color:#fff;
+         		line-height: 60px;
+         		text-align: center;
             }
         }
     }

@@ -13,3 +13,15 @@ export function newContact(data) {
     })
   ).then(res => res.json());
 }
+
+export function checkAccount(data) {
+  return (
+    fetch('http://localhost:3000/auth', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  ).then(res => res.json());
+}

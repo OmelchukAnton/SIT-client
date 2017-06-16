@@ -68,11 +68,11 @@ export default class Login extends Component {
                 </label>
               </div>
               <div>
-                {/* <Link to="/pm"> */}
+                <Link to="/pm">
                   <Button onClick={this.onCheckAccount} className="button__login">
                     Enter
                   </Button>
-                {/* </Link> */}
+                </Link>
               </div>
               <div className="form_entry">
                 <aside> Enter through: </aside>
@@ -90,7 +90,6 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        {console.log(this.checkAccount())}
         {this.checkAccount()}
       </div>
     );

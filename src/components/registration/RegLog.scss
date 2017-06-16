@@ -85,6 +85,7 @@
 .form_create_account {
     display: flex;
     justify-content: center;
+    background-color: #C7CFE0;
 
 
     h3 {
@@ -126,7 +127,7 @@
         button {
             border: none;
 
-            width: 350px;
+            // width: 350px;
             height: 30px;
             color: white;
             background-color: #70AF5C;

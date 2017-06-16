@@ -21,19 +21,38 @@ export default class Navigation extends Component {
   render() {
     return (
       <div className="Navigation__over_contacts">
-        <div className="name_app">
-          <div className="Messenger"> List of contacts </div>
+        <div className="nav_block">
+          <div className="general_info">
+            <div className="name_app">
+              <div className="Messenger"> Stay in touch! </div>
+            </div>
+            <div className="action_nav">
+              <input
+                className="search_users"
+                type="text"
+                placeholder="Search for users"
+                value={this.state.search}
+                onChange={this.updateSearch}
+              />
+              <div className="dropdown_list"> ... </div>
+            </div>
+          </div>
         </div>
-        <div className="action_nav">
-          <input
-            className="search_users"
-            type="text"
-            placeholder="Search for users"
-            value={this.state.search}
-            onChange={this.updateSearch}
-          />
-          <div className="dropdown_list"> ... </div>
-
+        <div className="mainUser_info">
+          <svg>
+            <rect />
+          </svg>
+          <div className="personal_info">
+            <div>
+              full name:
+            </div>
+            <div>
+              city:
+            </div>
+            <div>
+              education:
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -135,6 +135,7 @@ export default class CreateAccount extends Component {
   render() {
     return (
       <div>
+        {/* {console.log(this.newContact())} */}
         {this.newContact()}
       </div>
     );

@@ -12,7 +12,7 @@ Object.assign(rules, {
     rule: value => validator.isEmail(value),
     hint: value =>
       <span className="form-error is-visible">
-         <br /> {value} - is not an Email.
+        <br /> {value} - is not an Email.
       </span>,
   },
   alpha: {
