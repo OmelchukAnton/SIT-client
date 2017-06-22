@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import ContactList from './contacts/ContactList.jsx';
 import Navigation from './navigation/Navigation.jsx';
 import ChatWindow from './chatBody/ChatWindow.jsx';
-import { getContacts } from '../services/contacts.js';
-
+import { Link } from 'react-router-dom';
+import { getOwnContacts } from '../services/contacts.js';
+import ListOfContacts from './addContacts/ListOfContacts.jsx';
 
 import './App.scss';
 
@@ -12,16 +12,15 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filtered: [],
+      // filtered: [],
     };
     this.handleSearch = this.handleSearch.bind(this);
-    this.onAddNewItem = this.onAddNewItem.bind(this);
+    // this.onAddNewItem = this.onAddNewItem.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
   }
 
   componentDidMount() {
-    // getContacts().then(data => console.log(data));
-    getContacts().then((data) => {
+    getOwnContacts().then((data) => {
       this.setState({
         contacts: data,
         filtered: data,
@@ -29,14 +28,14 @@ export default class App extends Component {
     });
   }
 
-  onAddNewItem(name) {
-    getContacts().then((prevState) => {
-      this.setState({
-        filtered: [...prevState.filtered, { name }],
-        contacts: [...prevState.contacts, { name }],
-      });
-    });
-  }
+  // onAddNewItem(name) {
+  //   getContacts().then((prevState) => {
+  //     this.setState({
+  //       filtered: [...prevState.filtered, { name }],
+  //       contacts: [...prevState.contacts, { name }],
+  //     });
+  //   });
+  // }
 
   onItemClick(contact) {
     this.setState({
@@ -63,9 +62,11 @@ export default class App extends Component {
             <Navigation
               onSearchChange={this.handleSearch}
             />
+            <div className="info_contacts">
+            </div>
             <ContactList
               contacts={this.state.filtered}
-              onAddChange={this.onAddNewItem}
+              // onAddChange={this.onAddNewItem}
               onItemClick={this.onItemClick}
             />
           </section>
@@ -76,6 +77,7 @@ export default class App extends Component {
             {this.props.children}
           </section>
         </div>
+        <ListOfContacts />
       </main>
     );
   }

@@ -13,7 +13,7 @@ export default class Contact extends Component {
   }
 
   render() {
-    const { avatar, name, message, time } = this.props;
+    const { avatar, login, name, message, time } = this.props;
     return (
       <div className="view__contact" onClick={this.handleItemClick}>
         <div className="profile__contact">
@@ -21,6 +21,7 @@ export default class Contact extends Component {
             <img className="avatar" alt="avatar" src={avatar} />
           </div>
           <div>
+            <div className="login">{login}</div>
             <div className="name" >{name}</div>
             <div className="message">{message}</div>
             <div className="time">{time}</div>
@@ -33,6 +34,7 @@ export default class Contact extends Component {
 
 Contact.propTypes = {
   avatar: React.PropTypes.string,
+  login: React.PropTypes.string,
   name: React.PropTypes.string,
   message: React.PropTypes.string,
   time: React.PropTypes.string,
@@ -40,6 +42,7 @@ Contact.propTypes = {
 };
 Contact.defaultProps = {
   avatar: '',
+  login: '',
   name: '',
   message: '',
   time: '',

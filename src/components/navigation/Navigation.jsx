@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Navigation.scss';
+import MainUser from './../mainUser/MainUser.jsx';
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -38,22 +39,7 @@ export default class Navigation extends Component {
             </div>
           </div>
         </div>
-        <div className="mainUser_info">
-          <svg>
-            <rect />
-          </svg>
-          <div className="personal_info">
-            <div>
-              full name:
-            </div>
-            <div>
-              city:
-            </div>
-            <div>
-              education:
-            </div>
-          </div>
-        </div>
+        <MainUser />
       </div>
     );
   }
