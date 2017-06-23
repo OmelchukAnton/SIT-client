@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Navigation.scss';
-import MainUser from './../mainUser/MainUser.jsx';
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -39,7 +38,6 @@ export default class Navigation extends Component {
             </div>
           </div>
         </div>
-        <MainUser />
       </div>
     );
   }

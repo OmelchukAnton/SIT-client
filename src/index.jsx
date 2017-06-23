@@ -6,6 +6,7 @@ import App from './components/App.jsx';
 import MainPage from './components/homepage/MainPage.jsx';
 import RegistrationPage from './components/registration/RegistrationPage.jsx';
 import Messanges from './components/chatBody/Messanges.jsx';
+import ListOfContacts from './components/addContacts/ListOfContacts.jsx';
 
 import './index.scss';
 
@@ -21,6 +22,7 @@ render(
       <Route exact path="/" component={MainPage} />
       <Route path="/pm" component={HomeLayout} />
       <Route path="/reg" component={RegistrationPage} />
+      <Route path="/find" component={ListOfContacts} />
     </div>
   </Router>,
   document.getElementById('root'),

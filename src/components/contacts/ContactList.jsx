@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Contact from './Contact.jsx';
-
-import Search from './../searchContact/Search.jsx';
-
 import './ContactStyle.scss';
 
 
@@ -28,7 +25,7 @@ export default class ContactList extends Component {
     }
     return (
       <div className="block">
-        <div>
+        <div className="position_add_contact">
           <div className="contacts__list">
             <div className="info__users">
               {this.props.contacts.map( // TODO: вынести в отдельный метод
@@ -37,7 +34,7 @@ export default class ContactList extends Component {
                     <Link to={`/pm/${contact.firstname}`}>
                       <Contact
                         login={contact.login}
-                        name={contact.firstname + ' ' + contact.lastname}
+                        name={`${contact.firstname} ${contact.lastname}`}
                         // lastname={contact.name}
                         avatar={contact.avatar}
                         message={contact.message}
@@ -58,9 +55,9 @@ export default class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  contacts: React.PropTypes.array,
+  contacts: React.PropTypes.string,
   onItemClick: React.PropTypes.func.isRequired,
 };
 ContactList.defaultProps = {
-  contacts: [],
+  contacts: '',
 };

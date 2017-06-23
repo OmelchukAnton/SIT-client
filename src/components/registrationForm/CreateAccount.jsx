@@ -22,7 +22,7 @@ export default class CreateAccount extends Component {
 
 
   onAddNewAccount() {
-    newContact(this.state).then(response => console.log(response));
+    newContact(this.state).then(response => (response));
   }
 
   handleInputChange(event) {
@@ -135,7 +135,6 @@ export default class CreateAccount extends Component {
   render() {
     return (
       <div>
-        {/* {console.log(this.newContact())} */}
         {this.newContact()}
       </div>
     );
