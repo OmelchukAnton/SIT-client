@@ -20,6 +20,26 @@ export default class ContactList extends Component {
 
 
   render() {
+    const renderContactLink = (contact, i) => {
+      return (
+        <div className="selected__user" key={i}>
+          <Link to={`/pm/${contact.firstname}`}>
+            <Contact
+              login={contact.login}
+              name={`${contact.firstname} ${contact.lastname}`}
+              avatar={contact.avatar}
+              message={contact.message}
+              time={(contact.time || '').toString()}
+              contact={contact}
+              key={contact.id}
+              onClick={this.handleItemClick}
+            />
+          </Link>
+          {this.props.isAddContactAvailible ? (<button>+ add</button>) : null }
+        </div>
+      );
+    };
+
     if (this.props.contacts.length === 0) {
       return <div>загрузка контактов..</div>;
     }
@@ -28,24 +48,7 @@ export default class ContactList extends Component {
         <div className="position_add_contact">
           <div className="contacts__list">
             <div className="info__users">
-              {this.props.contacts.map( // TODO: вынести в отдельный метод
-                (contact, i) =>
-                  <div className="selected__user" key={i}>
-                    <Link to={`/pm/${contact.firstname}`}>
-                      <Contact
-                        login={contact.login}
-                        name={`${contact.firstname} ${contact.lastname}`}
-                        // lastname={contact.name}
-                        avatar={contact.avatar}
-                        message={contact.message}
-                        time={(contact.time || '').toString()}
-                        contact={contact}
-                        key={contact.id}
-                        onClick={this.handleItemClick}
-                      />
-                    </Link>
-                  </div>,
-                )}
+              {this.props.contacts.map(renderContactLink)}
             </div>
           </div>
         </div>
@@ -57,6 +60,7 @@ export default class ContactList extends Component {
 ContactList.propTypes = {
   contacts: React.PropTypes.string,
   onItemClick: React.PropTypes.func.isRequired,
+  isAddContactAvailible: React.PropTypes.func.isRequired,
 };
 ContactList.defaultProps = {
   contacts: '',

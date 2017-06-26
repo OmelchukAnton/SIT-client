@@ -3,6 +3,7 @@ import ContactList from './../contacts/ContactList.jsx';
 import SearchNewContact from './SearchNewContact.jsx';
 import { getContacts } from './../../services/contacts.js';
 
+
 export default class ListOfContacts extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +44,7 @@ export default class ListOfContacts extends Component {
             />
             <ContactList
               contacts={this.state.filtered}
+              isAddContactAvailible="true"
             />
           </section>
         </div>
