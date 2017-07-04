@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 export function getContacts() {
   return fetch('http://localhost:3000/users', {}).then(res => res.json().then(data => data.data));
 }
@@ -9,13 +11,16 @@ export function getOwnContacts() {
 }
 
 export function newContact(data) {
+  const _data = data;
+  _data.password = md5(_data.password);
+  _data.passwordConfirm = md5(_data.passwordConfirm);
   return (
     fetch('http://localhost:3000/reg', {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(_data),
     })
   ).then(res => res.json());
 }
@@ -35,4 +40,16 @@ export function checkAccount(userData) {
       localStorage.setItem('userData', JSON.stringify(requireField));
     }
   });
+}
+
+export function addIdNewContact(contact) {
+  return (
+    fetch('http://localhost:3000/addId', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({ contact }),
+    })
+  ).then(res => res.json());
 }

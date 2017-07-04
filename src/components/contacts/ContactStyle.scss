@@ -1,15 +1,15 @@
 .block {
     .contacts__list {
-        overflow: auto;
         .info__users {
-            height: 60%;
+            height: 65%;
             align-items: flex-end;
-            .selected__user {
-                &:active {
-                    box-shadow: 2px 0px 10px blue;
-                }
-            }
+            overflow: auto;
         }
+    }
+}
+.selected__user {
+    &:active {
+        box-shadow: 2px 0px 10px blue;
     }
 }
 
@@ -17,6 +17,7 @@
 .view__contact {
     margin-top: 10px;
     .profile__contact {
+        border: 1px dotted grey;
         display: flex;
     	font-family: arial, sans-serif;
     	padding: 5px;

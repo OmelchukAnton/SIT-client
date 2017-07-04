@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import ContactList from './../contacts/ContactList.jsx';
 import SearchNewContact from './SearchNewContact.jsx';
+import { Link } from 'react-router-dom';
 import { getContacts } from './../../services/contacts.js';
+import './find.scss';
 
 
 export default class ListOfContacts extends Component {
@@ -36,16 +38,21 @@ export default class ListOfContacts extends Component {
 
   render() {
     return (
-      <main>
+      <main className="addContats_page">
         <div>
           <section>
-            <SearchNewContact
-              onSearchChange={this.handleSearch}
-            />
-            <ContactList
-              contacts={this.state.filtered}
-              isAddContactAvailible="true"
-            />
+            <Link to="/pm">
+              <button className="return_mypage">return to my page</button>
+            </Link>
+            <div className="contacts_list">
+              <SearchNewContact
+                onSearchChange={this.handleSearch}
+              />
+              <ContactList
+                contacts={this.state.filtered}
+                isAddContactAvailible="true"
+              />
+            </div>
           </section>
         </div>
       </main>
