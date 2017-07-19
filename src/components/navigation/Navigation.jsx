@@ -20,25 +20,25 @@ export default class Navigation extends Component {
 
   render() {
     return (
-      <div className="Navigation__over_contacts">
-        <div className="nav_block">
-          <div className="general_info">
-            <div className="name_app">
-              <div className="Messenger"> Stay in touch! </div>
+      <section className="Navigation_over_contacts">
+        <div className="nav__block">
+          <div className="general__info">
+            <div className="name__app">
+              Stay in touch!
             </div>
-            <div className="action_nav">
+            <div className="action__nav">
               <input
-                className="search_users"
+                className="nav_search_users"
                 type="text"
                 placeholder="Search for users"
                 value={this.state.search}
                 onChange={this.updateSearch}
               />
-              <div className="dropdown_list"> ... </div>
+              <div className="nav__dropdown"> ... </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

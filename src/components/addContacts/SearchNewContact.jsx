@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default class SearchNewContact extends Component {
   constructor(props) {
@@ -18,7 +20,10 @@ export default class SearchNewContact extends Component {
 
   render() {
     return (
-      <div className="action_nav">
+      <div className="header_find_contacts">
+        <Link to="/pm">
+          <button className="return_to_pm">return to my page</button>
+        </Link>
         <input
           className="search_users"
           type="text"

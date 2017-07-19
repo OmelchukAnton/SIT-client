@@ -15,7 +15,7 @@ export default function Messanges(props) {
           {props.match.params.userId}
         </div>
       </div>
-      <div className="sedding_messages">
+      <div className="sedding__messages">
         <input
           className="input__message"
           type="text"

@@ -5,29 +5,34 @@ import './MainUserStyle.scss';
 const MainUser = () => {
   const user = JSON.parse(localStorage.getItem('userData') || '{}');
   return (
-    <div className="content_MainUser">
-      <div className="mainUser_info">
-        <svg>
-          <rect />
+    <div className="content__MainUser">
+      <div className="mainUser__info">
+        <svg className="main_ava_svg">
+          <rect className="main_ava_rect" />
         </svg>
-        <div className="personal_info">
+        <section className="personal__info">
           <div>
-            firstname: {user.firstname}
+            {user.firstname} {user.lastname}
           </div>
-          <div>
-            lastname: {user.lastname}
+          <div className="main_info_status">
+            <input placeholder="change status" />
           </div>
           <div>
             email: {user.email}
           </div>
-        </div>
+        </section>
       </div>
-      <div className="position_newContact_contact">
-        <Link to="/find">
-          <button className="newContacts_button">
-            + new contacts
-          </button>
-        </Link>
+      <div className="nav_under_mainInfo">
+        <div className="position_my_contacts">
+          My contacts:
+        </div>
+        <div className="position_newContact_contact">
+          <Link to="/find">
+            <button className="add_button_style">
+              + new contact
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

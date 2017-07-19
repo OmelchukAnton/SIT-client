@@ -1,42 +1,63 @@
-.homepage__body {
+.homepage {
     height: 100%;
     background-color: #01B8A4;
     color: white;
 
-    .greeting {
-        padding-top: 30px;
-        text-align: center;
-        font-size: 40px;
-    }
-    .greeting__info {
-        padding-left: 60%;
-        font-size: 25px;
-        margin: 20px 0;
+    .homepage__head {
+        height: 20%;
+
+        .homepage__greeting {
+            // padding-top: 30px;
+            text-align: center;
+            font-size: 40px;
+        }
+        .homepage_greeting_info {
+            padding-left: 60%;
+            font-size: 25px;
+            margin: 20px 0;
+        }
     }
 
-    .about_app {
-        columns: 2;
+    .homepage_content {
+        columns: 3;
         background-color: #305075;
 
-        .left_side {
-            border: 1px dotted grey;
+        .left_side_content {
+            height: 80%;
 
-            .first_picture {
-                border-radius: 100px; /* Радиус скругления */
+            .picture__one {
+                margin-top: 30px;
+                border-radius: 100px;
                 box-shadow: 0 0 0 3px yellow, 0 0 13px #333; /* Параметры теней */
-                transform: rotate(-50deg);
-                margin-bottom: 70px;
+                transform: rotate(-20deg);
             }
-            .second_picture {
-                margin-top: 50px;
-                margin-bottom: 50px;
-                border-radius: 50px;
-                border: 3px solid silver; /* Параметры рамки */
-                transform: rotate(15deg);
+            .picture__two {
+                margin: 10px 15px 10px 40px;
+                border-radius: 100px;
+                border: 3px solid silver;
+                transform: rotate(-15deg);
             }
         }
-        .button__goto_registration {
-            
+        .center {
+            padding-top: 10px;
+            height: 80%;
+
+            h1 {
+                text-align: center;
+            }
+        }
+
+        .form__reg {
+            height: 80%;
+
+            .button_goto_registration {
+                box-shadow: 0 0 0 3px white, 0 0 13px #333;
+                background-color: #60e035;
+                margin: 10px;
+                margin-left: 100px;
+                padding: 10px;
+
+            }
         }
     }
 }

@@ -1,14 +1,20 @@
-.nav__over_chatwindow {
+.nav_over_chatwindow {
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     background-color: #f47846;
-    height: 150px;
+    height: 200px;
     font-size: 20px;
 
-    .return_back {
-        margin-left: 30px;
+    .return__back {
+        button {
+            border: none;
+            border-radius: 100px;
+            height: 40px;
+            width: 60px;
+            margin-left: 30px;
+        }
     }
 
     .chat_with_user {
@@ -19,10 +25,9 @@
 }
 
 
-
 .chat__content {
     background-color: #f5f5ff;
-    height: 77%;
+    height: 68%;
 
     .chat__design {
         display: flex;
@@ -50,12 +55,10 @@
 
     .input__message {
         margin: 10px 0px 0px 20px;
+        height: 30px;
+        padding-left: 10px;
+        width: 90%;
 
-        .input_message {
-            height: 30px;
-            padding-left: 10px;
-            width: 90%;
-        }
         .send__message {
             height: 30px;
         }

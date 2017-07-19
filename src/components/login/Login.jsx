@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
 import { checkAccount } from '../../services/contacts.js';
+import './LoginStyle.scss';
 
 
 export default class Login extends Component {
@@ -18,12 +19,7 @@ export default class Login extends Component {
   }
 
   onCheckAccount() {
-    // console.log(this.checkAccount());
-    // checkAccount(this.state).then(response);
-    // console.log(this.state);
     checkAccount(this.state);
-    // checkAccount(this.state).then(response => console.log(response));
-    // checkAccount(this.state).then(response => console.log(response));
   }
 
   handleInputChange(event) {
@@ -34,18 +30,18 @@ export default class Login extends Component {
 
   checkAccount() {
     return (
-      <div className="content_login">
+      <div className="login__page">
         <div className="form__login">
           <fieldset className="fieldset_login_form">
             <Form className="location__inform">
-              <div className="login_info">
+              <div className="login__info">
                 <h2> Authorization </h2>
-                <summary>
+                <summary className="login_info_summary">
                   Enter your registration information to enter your personal account.
                 </summary>
               </div>
               <div>
-                <label htmlFor="email" className="location__fields">
+                <label htmlFor="email" className="location_inputs">
                   <Input
                     className="input__email"
                     placeholder="email@email.com"
@@ -55,7 +51,7 @@ export default class Login extends Component {
                     validations={['required', 'email']}
                   />
                 </label>
-                <label htmlFor="password" className="location__fields">
+                <label htmlFor="password" className="location_inputs">
                   <Input
                     className="input__password"
                     type="password"
@@ -74,9 +70,9 @@ export default class Login extends Component {
                   </Button>
                 </Link>
               </div>
-              <div className="form_entry">
+              <div className="form__entry">
                 <aside> Enter through: </aside>
-                <div className="passport_entry">
+                <div className="passport__entry">
                   <summary> Facebook </summary>
                   <summary> Google+ </summary>
                 </div>

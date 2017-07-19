@@ -13,7 +13,6 @@ export function getOwnContacts() {
 export function newContact(data) {
   const _data = data;
   _data.password = md5(_data.password);
-  _data.passwordConfirm = md5(_data.passwordConfirm);
   return (
     fetch('http://localhost:3000/reg', {
       headers: {
@@ -26,6 +25,9 @@ export function newContact(data) {
 }
 
 export function checkAccount(userData) {
+  const _userData = userData;
+  _userData.password = md5(_userData.password);
+
   return (
     fetch('http://localhost:3000/auth', {
       headers: {

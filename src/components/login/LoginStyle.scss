@@ -1,0 +1,62 @@
+.login__page {
+    // background-color: #87B3C0;
+    // height: 90%;
+
+    .form__login {
+        // display: flex;
+        // justify-content: center;
+
+        .fieldset_login_form {
+            width: 210px;
+            margin: 50px;
+            background-color: #F3F3F3;
+            border: none;
+            border-radius: 5px;
+
+        }
+
+        .location__inform {
+            color: #4A4446;
+
+            .login__info {
+                padding: 0 10px;
+
+                .login_info_summary {
+                    font-size: 13px;
+                    color: #808682;
+                }
+            }
+
+            .location_inputs {
+                display: flex;
+                padding: 20px 10px 0 10px;
+
+                .input__email, .input__password {
+                    padding: 10px;
+                    border-radius: 5px;
+
+                    &:focus {
+                        background-color: #DFE9EB;
+                    }
+                }
+            }
+
+            .button__login {
+                width: 90%;
+                margin: 10px 10px 0 10px;
+                padding: 10px;
+            }
+
+            .form__entry {
+                display: flex;
+                font-size: 13px;
+                margin-left: 10px;
+                margin-top: 20px;
+
+                .passport__entry {
+                    margin-left: 50px;
+                }
+            }
+        }
+    }
+}

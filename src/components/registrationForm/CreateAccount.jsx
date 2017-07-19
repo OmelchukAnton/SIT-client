@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
 import { newContact } from '../../services/contacts.js';
+import './CreateAcc.scss';
 
 
 export default class CreateAccount extends Component {
@@ -14,6 +15,7 @@ export default class CreateAccount extends Component {
       city: '',
       email: '',
       password: '',
+      passwordConfirm: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -35,15 +37,15 @@ export default class CreateAccount extends Component {
     return (
       <main className="form_create_account">
         <Form>
-          <h3>Registration</h3>
+          <h3>Create a new account</h3>
           <p className="required">*All fields are required.</p>
           <label htmlFor="firstname" className="field_group">
             <div className="blocks">
-              Firstname:
               <Input
                 className="inputs_group"
                 errorClassName="is-invalid-input"
                 type="text"
+                placeholder="Firstname"
                 containerClassName=""
                 value=""
                 onChange={this.handleInputChange}
@@ -54,11 +56,12 @@ export default class CreateAccount extends Component {
           </label>
           <label htmlFor="lastname" className="field_group">
             <div className="blocks">
-              Lastname:
+              {/* Lastname: */}
               <Input
                 className="inputs_group"
                 errorClassName="is-invalid-input"
                 type="text"
+                placeholder="Lastname"
                 containerClassName=""
                 value=""
                 onChange={this.handleInputChange}
@@ -91,6 +94,7 @@ export default class CreateAccount extends Component {
               <Input
                 className="inputs_group"
                 value="email@email.com"
+                // placeholder="email@email.com"
                 onChange={this.handleInputChange}
                 name="email"
                 validations={['required', 'email']}
@@ -103,6 +107,7 @@ export default class CreateAccount extends Component {
               <Input
                 className="inputs_group"
                 type="password"
+                placeholder="*****"
                 value=""
                 onChange={this.handleInputChange}
                 name="password"
@@ -112,10 +117,10 @@ export default class CreateAccount extends Component {
           </label>
           <label htmlFor="confirm" className="field_group">
             <div className="blocks">
-            Confirm password:
               <Input
                 className="inputs_group"
                 type="password"
+                placeholder="Confirm password"
                 errorClassName="is-invalid-input"
                 containerClassName=""
                 value=""
@@ -125,9 +130,11 @@ export default class CreateAccount extends Component {
               />
             </div>
           </label>
-          <Link to="/pm" className="button_create_account">
-            <Button onClick={this.onAddNewAccount}> Create an account. </Button>
-          </Link>
+          <div className="button_create_account">
+            <Link to="/" >
+              <Button onClick={this.onAddNewAccount}> Create an account. </Button>
+            </Link>
+          </div>
         </Form>
       </main>
     );
@@ -153,5 +160,4 @@ CreateAccount.defaultProps = {
   city: '',
   email: '',
   password: '',
-  placeholder: '',
 };

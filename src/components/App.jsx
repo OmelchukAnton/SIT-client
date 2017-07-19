@@ -5,7 +5,6 @@ import ChatWindow from './chatBody/ChatWindow.jsx';
 import { getOwnContacts } from '../services/contacts.js';
 import MainUser from './mainUser/MainUser.jsx';
 
-
 import './App.scss';
 
 export default class App extends Component {
@@ -20,7 +19,6 @@ export default class App extends Component {
 
   componentDidMount() {
     getOwnContacts().then((data) => {
-      // console.log(data);
       this.setState({
         contacts: data,
         filtered: data,
@@ -38,7 +36,7 @@ export default class App extends Component {
   handleSearch(value) {
     const { contacts } = this.state;
     const filtered = contacts.filter(
-    contact => contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+      contact => contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
     );
 
     this.setState({
@@ -49,16 +47,18 @@ export default class App extends Component {
   render() {
     return (
       <main>
-        <div className="location__chat_and_contacts">
+        <div className="location_chat_and_contacts">
           <section>
             <Navigation
               onSearchChange={this.handleSearch}
             />
             <MainUser />
-            <ContactList
-              contacts={this.state.filtered}
-              onItemClick={this.onItemClick}
-            />
+            <div className="tada">
+              <ContactList
+                contacts={this.state.filtered}
+                onItemClick={this.onItemClick}
+              />
+            </div>
           </section>
           <section>
             <ChatWindow

@@ -1,22 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Login from './../login/Login.jsx';
 import './StartPage.scss';
 
+
 const MainPage = () => (
-  <main className="homepage__body">
-    <article className="greeting"> Welcome! </article>
-    <div className="greeting__info"> Glad you are here... </div>
-    <section className="about_app">
-      <div className="left_side">
-        <img src="./avatars/lists.jpg" alt="example-listOfContacts" className="first_picture" />
-        <img src="./avatars/chat.jpg" alt="example-chat" className="second_picture" />
+  <main className="homepage">
+    <article className="homepage__head">
+      <h2 className="homepage__greeting">Welcome! </h2>
+      <p className="homepage_greeting_info"> Glad you are here... </p>
+    </article>
+    <section className="homepage_content">
+      <div className="left_side_content">
+        <img src="./avatars/lists.jpg" alt="example-listOfContacts" className="picture__one" />
+        <img src="./avatars/chat.jpg" alt="example-chat" className="picture__two" />
       </div>
-      <div className="rigth_side">
-        <h1> about SPA... </h1>
+      <div className="center">
+        <h1> Stay in touch! </h1>
+        <p> about messenger... </p>
+      </div>
+      <div className="form__reg">
         <Link to="/reg">
-          <button className="button__goto_registration">Log in</button>
+          <button className="button_goto_registration">R e g i s t r a t i o n</button>
         </Link>
+        <Login />
       </div>
+
     </section>
   </main>
 );
