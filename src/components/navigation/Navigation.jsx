@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Navigation.scss';
+
+function onExitClick() {
+  JSON.parse(localStorage.removeItem('userData') || '{}');
+}
 
 export default class Navigation extends Component {
   constructor(props) {
@@ -34,7 +39,11 @@ export default class Navigation extends Component {
                 value={this.state.search}
                 onChange={this.updateSearch}
               />
-              <div className="nav__dropdown"> ... </div>
+              <Link to="/">
+                <button className="nav__dropdown" onClick={onExitClick}>
+                   exit
+                 </button>
+              </Link>
             </div>
           </div>
         </div>
