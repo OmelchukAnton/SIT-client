@@ -10,7 +10,15 @@ export function getOwnContacts() {
   return fetch(url, {}).then(res => res.json().then(data => data.data[0].contacts));
 }
 
-export function newContact(data) {
+export function getFilterContacts() {
+  const user = JSON.parse(localStorage.getItem('userData') || '{}');
+
+  return fetch(`http://localhost:3000/find/${user._id}`, {}).then(res => res.json()).then(
+    data => data.data,
+  );
+}
+
+export function createContact(data) {
   const _data = data;
   _data.password = md5(_data.password);
   return (
@@ -25,8 +33,10 @@ export function newContact(data) {
 }
 
 export function checkAccount(userData) {
-  const _userData = userData;
-  _userData.password = md5(_userData.password);
+  const hashedUserData = {
+    ...userData,
+    password: md5(userData.password),
+  };
 
   return (
     fetch('http://localhost:3000/auth', {
@@ -34,7 +44,7 @@ export function checkAccount(userData) {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify(userData),
+      body: JSON.stringify(hashedUserData),
     })
   ).then(res => res.json()).then((data) => {
     const requireField = data.data && data.data[0];
@@ -45,13 +55,18 @@ export function checkAccount(userData) {
 }
 
 export function addIdNewContact(contact) {
+  const user = JSON.parse(localStorage.getItem('userData') || '{}');
+  const data = {
+    mainId: user._id,
+    newContactId: contact._id,
+  };
   return (
     fetch('http://localhost:3000/addId', {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify({ contact }),
+      body: JSON.stringify({ data }),
     })
   ).then(res => res.json());
 }
