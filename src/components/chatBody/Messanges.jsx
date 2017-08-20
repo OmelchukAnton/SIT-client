@@ -1,4 +1,6 @@
 import React from 'react';
+import InputMessage from './InputMessage.jsx';
+import OutputMessages from './OutputMessages.jsx';
 import './Chats.scss';
 
 export default function Messanges(props) {
@@ -8,21 +10,12 @@ export default function Messanges(props) {
         <div className="host">
           Me
         </div>
-        <div className="correspondence">
-          dialog
-        </div>
+        <OutputMessages />
         <div className="companion">
           {props.match.params.userId}
         </div>
       </div>
-      <div className="sedding__messages">
-        <input
-          className="input__message"
-          type="text"
-          placeholder="Write a message..."
-        />
-        <button className="send__message"> send </button>
-      </div>
+      <InputMessage />
     </div>
   );
 }

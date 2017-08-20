@@ -37,13 +37,21 @@
         .host {
             width: 20%;
             border: 1px dotted grey;
-
         }
 
         .correspondence {
             width: 80%;
-            justify-content: center;
-            border: 1px dotted grey;
+
+            .mainUser {
+                margin-top: 5px;
+                border: 1px solid green;
+            }
+            .otherUser {
+                margin-top: 5px;
+                display: flex;
+                justify-content: flex-end;
+                border: 1px solid blue;
+            }
         }
 
         .companion {
