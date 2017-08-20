@@ -26,7 +26,6 @@ export default class App extends Component {
     });
   }
 
-
   onItemClick(contact) {
     this.setState({
       contactItem: contact,
@@ -38,7 +37,6 @@ export default class App extends Component {
     const filtered = contacts.filter(
       contact => contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
     );
-
     this.setState({
       filtered,
     });

@@ -5,12 +5,11 @@ import './ContactStyle.scss';
 import '../addContacts/ListOfContacts.jsx';
 import { addIdNewContact } from './../../services/contacts.js';
 
+function onAddNewItem(contact) {
+  addIdNewContact(contact);
+}
+
 export default class ContactList extends Component {
-
-  static onAddNewItem(contact) {
-    addIdNewContact(contact).then(response => response);
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -29,18 +28,16 @@ export default class ContactList extends Component {
         <Link to={`/pm/${contact.firstname}`}>
           <Contact
             name={`${contact.firstname} ${contact.lastname}`}
-            avatar={contact.avatar}
-            message={contact.message}
-            time={(contact.time || '').toString()}
-            // contact={contact}
-            // key={contact._id}
+            // avatar={contact.avatar}
+            // message={contact.message}
+            // time={(contact.time || '').toString()}
             onClick={this.handleItemClick}
           />
+          {this.props.isAddContactAvailible ?
+            (<button onClick={() => onAddNewItem(contact)}>
+              + add
+            </button>) : null }
         </Link>
-        {this.props.isAddContactAvailible ?
-          (<button onClick={() => ContactList.onAddNewItem(contact)}>
-            + add
-          </button>) : null }
       </div>;
 
     if (this.props.contacts.length === 0) {
@@ -62,11 +59,3 @@ ContactList.propTypes = {
 ContactList.defaultProps = {
   contacts: '',
 };
-
-// // console.log(contact._id, contact.firstname, contact.lastname)
-// contact = {
-//   _id: contact._id,
-//   firstname: contact.firstname,
-//   lastname: contact.lastname,
-// };
-// // console.log(contact)

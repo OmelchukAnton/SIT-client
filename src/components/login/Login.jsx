@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'react-validation/lib/build/validation.rc.js';
-import { Link } from 'react-router-dom';
 import { checkAccount } from '../../services/contacts.js';
 import './LoginStyle.scss';
 
@@ -15,10 +14,10 @@ export default class Login extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.onCheckAccount = this.onCheckAccount.bind(this);
+    this.AccountVerification = this.AccountVerification.bind(this);
   }
 
-  onCheckAccount() {
+  AccountVerification() {
     checkAccount(this.state);
   }
 
@@ -64,11 +63,9 @@ export default class Login extends Component {
                 </label>
               </div>
               <div>
-                <Link to="/pm">
-                  <Button onClick={this.onCheckAccount} className="button__login">
-                    Enter
-                  </Button>
-                </Link>
+                <Button onClick={this.AccountVerification} className="button__login">
+                  Enter
+                </Button>
               </div>
               <div className="form__entry">
                 <aside> Enter through: </aside>

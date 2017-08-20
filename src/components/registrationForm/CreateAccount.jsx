@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
-import { newContact } from '../../services/contacts.js';
+import { createContact, createNewChat } from '../../services/contacts.js';
+// import { createNewChat } from '../../services/contacts.js';
 import './CreateAcc.scss';
 
 
@@ -24,7 +25,8 @@ export default class CreateAccount extends Component {
 
 
   onAddNewAccount() {
-    newContact(this.state).then(response => (response));
+    createContact(this.state);
+    // createNewChat(this.state);
   }
 
   handleInputChange(event) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getContacts } from './../../services/contacts.js';
+import { getFilterContacts } from './../../services/contacts.js';
 import ContactList from './../contacts/ContactList.jsx';
 import SearchNewContact from './SearchNewContact.jsx';
 import './find.scss';
@@ -15,7 +15,7 @@ export default class ListOfContacts extends Component {
   }
 
   componentDidMount() {
-    getContacts().then((data) => {
+    getFilterContacts().then((data) => {
       this.setState({
         contacts: data,
         filtered: data,
@@ -27,7 +27,8 @@ export default class ListOfContacts extends Component {
   handleSearch(value) {
     const { contacts } = this.state;
     const filtered = contacts.filter(
-    contact => contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+      contact => contact.firstname &&
+      contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
     );
     this.setState({
       filtered,
