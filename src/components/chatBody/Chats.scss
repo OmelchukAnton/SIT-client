@@ -3,15 +3,16 @@
     align-items: center;
     justify-content: center;
     color: white;
-    background-color: #f47846;
+    background-color: #C9ADDF;
     height: 200px;
     font-size: 20px;
 
     .return__back {
         button {
-            border: none;
+            border-left-color: steelblue;
+            border-right: 0;
             border-radius: 100px;
-            height: 40px;
+            padding: 3px 0;
             width: 60px;
             margin-left: 30px;
         }
@@ -26,38 +27,51 @@
 
 
 .chat__content {
-    background-color: #f5f5ff;
     height: 68%;
 
     .chat__design {
         display: flex;
         border: 1px dotted grey;
         height: 90%;
+        background-color: #f5f5ff;
+
+        .sphere {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            border: 1px solid blue;
+            text-align: center;
+        }
 
         .host {
-            width: 20%;
-            border: 1px dotted grey;
+            padding: 10px;
+            width: 10%;
+            border: 1px solid grey;
         }
 
         .correspondence {
-            width: 80%;
+            // width: 75%;
+            .view__messages {
 
-            .mainUser {
-                margin-top: 5px;
-                border: 1px solid green;
-            }
-            .otherUser {
-                margin-top: 5px;
-                display: flex;
-                justify-content: flex-end;
-                border: 1px solid blue;
+                .textMessage {
+                    margin: 10px 45% 10px 10px;
+                    padding: 7px;
+                    border-radius: 9px;
+                    background-color: #4CDAFE;
+                    border: 2px solid #B2FFBB;
+                }
+
+                .timeMessage {
+                    color: #009E5C;
+                    text-align: right;
+                }
             }
         }
 
         .companion {
-            width: 20%;
-            justify-content: flex-end;
-            border: 1px dotted grey;
+            padding: 10px;
+            width: 10%;
+            border: 1px solid grey;
         }
     }
 

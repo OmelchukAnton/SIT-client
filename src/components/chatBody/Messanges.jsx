@@ -4,15 +4,18 @@ import OutputMessages from './OutputMessages.jsx';
 import './Chats.scss';
 
 export default function Messanges(props) {
+  const user = JSON.parse(localStorage.getItem('userData') || '{}');
   return (
     <div className="chat__content">
       <div className="chat__design">
         <div className="host">
-          Me
+          {user.firstname}
+          <div className="sphere"> ava </div>
         </div>
         <OutputMessages />
         <div className="companion">
-          {props.match.params.userId}
+          {props.match.params.chatId}
+          <div className="sphere"> ava </div>
         </div>
       </div>
       <InputMessage />

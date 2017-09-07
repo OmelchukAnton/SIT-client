@@ -5,32 +5,36 @@ import './Chats.scss';
 export default class OutputMessages extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      messages: '',
+      messages: [],
     };
-    // this.writeMessage = this.writeMessage.bind(this);
-    // this.sendMessage = this.sendMessage.bind(this);
   }
 
   componentDidMount() {
     getMessages().then((data) => {
       this.setState({
-        outgoing: data.myMessage,
-        incoming: data.Incoming,
+        messages: data,
       });
     });
+  }
+
+  renderMessages() {
+    return this.state.messages.map(message => (
+      <div className="view__messages">
+        <fieldset className="textMessage">
+          <legend className="timeMessage"> {message.sendTimeOrDate} </legend>
+          {message.textMessage}
+        </fieldset>
+      </div>
+    ));
   }
 
 
   render() {
     return (
       <div className="correspondence">
-        <div className="mainUser">
-          {this.state.outgoing}
-        </div>
-        <div className="otherUser">
-          {this.state.incoming}
-        </div>
+        {this.renderMessages()}
       </div>
     );
   }

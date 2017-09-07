@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { sendMessage } from '../../services/messages.js';
 import './Chats.scss';
 
 export default class InputMessage extends Component {
@@ -7,31 +8,20 @@ export default class InputMessage extends Component {
     this.state = {
       message: '',
     };
-    // this.writeMessage = this.writeMessage.bind(this);
-    // this.sendMessage = this.sendMessage.bind(this);
+    this.writeMessage = this.writeMessage.bind(this);
+    this.sendNewMessage = this.sendNewMessage.bind(this);
   }
 
-  // writeMessage({ target }) {
-  //   this.setState({
-  //     message: target.value,
-  //   });
-  //   // console.log(this.state)
-  //   // this.props.onMessageChange(target.value);
-  // }
-  //
-  // sendMessage() {
-  //   this.props.onClick(this.writeMessage);
-  // }
+  writeMessage({ target }) {
+    this.setState({
+      message: target.value,
+    });
+  }
 
-  // writeMessage({ target }) {
-  //   this.setState({
-  //     message: target.value,
-  //   });
-  // }
-  //
-  // sendMessage() {
-  //
-  // }
+  sendNewMessage() {
+    sendMessage(this.state);
+  }
+
 
   render() {
     return (
@@ -40,14 +30,17 @@ export default class InputMessage extends Component {
           className="input__message"
           type="text"
           placeholder="Write a message..."
+          onChange={this.writeMessage}
+          value={this.state.message}
         />
-        <button className="send__message"> send </button>
+        <button className="send__message" onClick={this.sendNewMessage}> send </button>
       </div>
     );
   }
 }
 
 InputMessage.propTypes = {
+  onClick: React.PropTypes.func.isRequired,
 };
 InputMessage.defaultProps = {
 };
