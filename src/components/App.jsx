@@ -4,7 +4,6 @@ import Navigation from './navigation/Navigation.jsx';
 import ChatWindow from './chatBody/ChatWindow.jsx';
 import { getOwnContacts } from '../services/contacts.js';
 import MainUser from './mainUser/MainUser.jsx';
-
 import './App.scss';
 
 export default class App extends Component {
@@ -15,6 +14,7 @@ export default class App extends Component {
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +42,12 @@ export default class App extends Component {
     });
   }
 
+  handleBackClick() {
+    this.setState({
+      contactItem: null,
+    });
+  }
+
   render() {
     return (
       <main>
@@ -61,6 +67,7 @@ export default class App extends Component {
           <section>
             <ChatWindow
               contact={this.state.contactItem}
+              onClick={this.handleBackClick}
             />
             {this.props.children}
           </section>
