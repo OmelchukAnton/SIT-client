@@ -22,7 +22,7 @@ export default class ChatWindow extends Component {
       <div className="nav_over_chatwindow">
         <Link to="/pm">
           <div className="return__back">
-            <button onClick={this.handleBackClick}> back </button>
+            <button onClick={this.handleBackClick} />
           </div>
         </Link>
         <div className="chat_with_user"> Send a message {this.props.contact} </div>

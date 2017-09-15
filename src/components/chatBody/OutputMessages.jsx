@@ -20,16 +20,22 @@ export default class OutputMessages extends Component {
   }
 
   renderMessages() {
+    const user = JSON.parse(localStorage.getItem('userData') || '{}');
+
     return this.state.messages.map(message => (
-      <div className="view__messages">
-        <fieldset className="textMessage">
-          <legend className="timeMessage"> {message.sendTimeOrDate} </legend>
-          {message.textMessage}
+      <div className={message.whoSend === user.firstname ? 'view__messagesHost' : 'view__messages'}>
+        <fieldset className="messageContent">
+          <legend className="whoSend"> {message.whoSend} </legend>
+          <div className="textMessage">
+            {message.text}
+          </div>
+          <div className="timeMessage">
+            {message.sendTime}
+          </div>
         </fieldset>
       </div>
     ));
   }
-
 
   render() {
     return (

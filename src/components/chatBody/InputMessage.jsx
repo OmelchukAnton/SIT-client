@@ -12,6 +12,7 @@ export default class InputMessage extends Component {
     this.sendNewMessage = this.sendNewMessage.bind(this);
   }
 
+
   writeMessage({ target }) {
     this.setState({
       message: target.value,
@@ -33,7 +34,7 @@ export default class InputMessage extends Component {
           onChange={this.writeMessage}
           value={this.state.message}
         />
-        <button className="send__message" onClick={this.sendNewMessage}> send </button>
+        <button className="send__message" onClick={this.writeMessage.length !== 0 ? this.sendNewMessage : null}> Send </button>
       </div>
     );
   }
