@@ -13,6 +13,7 @@
             border-right: 0;
             border: 20px solid transparent;
             border-right: 20px solid #7485af;
+            outline: none;
         }
     }
 
@@ -24,10 +25,9 @@
 
 
 .chat__content {
-    height: 68%;
+    height: 70%;
 
     .chat__design {
-        display: flex;
         height: 90%;
         background-color: #f5f5ff;
 
@@ -48,8 +48,8 @@
 
         .correspondence {
             height: 100%;
-            width: 80%;
-            overflow: auto;
+            overflow: scroll;
+            overflow-x: hidden;
 
             .view__messagesHost {
                 display: flex;
@@ -58,25 +58,22 @@
             .view__messages {
                 display: flex;
                 justify-content: flex-end;
+            }
 
-                .messageContent {
-                    border-radius: 9px;
-                    background-color: #4CDAFE;
+            .whoSend {
+            }
 
-                }
+            .textMessage {
+            }
 
-
-                .whoSend {
-                }
-
-                .textMessage {
-                }
-
-                .timeMessage {
-                    color: #009E5C;
-                    text-align: right;
-                    font-size: 11px;
-                }
+            .timeMessage {
+                color: #009E5C;
+                text-align: right;
+                font-size: 11px;
+            }
+            .messageContent {
+                border-radius: 9px;
+                background-color: #4CDAFE;
             }
         }
 
@@ -91,19 +88,15 @@
     .sedding__messages {
 
         .input__message {
-            height: 30px;
             padding-left: 10px;
-            width: 88.5%;
-        }
-
-        button {
+            width: 90%;
             height: 30px;
-            width: 11.5%;
-            background-color: #7485af;
 
         }
 
         .send__message {
+            width: 10%;
+            background-color: #7485af;
             height: 30px;
         }
     }

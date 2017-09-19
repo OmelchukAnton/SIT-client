@@ -5,13 +5,13 @@ import { BrowserHistory } from 'react-history';
 import App from './components/App.jsx';
 import MainPage from './components/homepage/MainPage.jsx';
 import RegistrationPage from './components/registration/RegistrationPage.jsx';
-import Messanges from './components/chatBody/Messanges.jsx';
+import ChatContainer from './components/chatBody/ChatContainer.jsx';
 import ListOfContacts from './components/addContacts/ListOfContacts.jsx';
 import './index.scss';
 
 const HomeLayout = () => (
   <App>
-    <Route path="/pm/:chatId" component={Messanges} />
+    <Route path="/pm/:chatId" component={ChatContainer} />
   </App>
 );
 
