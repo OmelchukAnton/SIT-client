@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { sendMessage, getMessages } from '../../services/messages.js';
+import { getFirstName } from '../../services/user.js';
 import './Chats.scss';
 
 export default class ChatContainer extends Component {
@@ -12,15 +13,43 @@ export default class ChatContainer extends Component {
     };
     this.writeMessage = this.writeMessage.bind(this);
     this.sendNewMessage = this.sendNewMessage.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
   }
 
   componentDidMount() {
-    getMessages().then((data) => {
+    const { chatId } = this.props.match.params;
+    this.getMessages(chatId);
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    const currentId = this.props.match.params.chatId;
+    const nextId = nextProps.match.params.chatId;
+
+    if (currentId !== nextId) {
+      this.getMessages(nextId);
+    }
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  getMessages(chatId) {
+    getMessages(chatId).then((data) => {
       this.setState({
         messages: data,
       });
     });
   }
+
+  scrollToBottom() {
+    const scrollHeight = this.correspondence.scrollHeight;
+    const height = this.correspondence.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    this.correspondence.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  }
+
   writeMessage({ target }) {
     this.setState({
       message: target.value,
@@ -28,31 +57,37 @@ export default class ChatContainer extends Component {
   }
 
   sendNewMessage() {
+    const chatId = this.props.match.params.chatId;
     if (this.state.message.length === 0) {
       return;
     }
-    sendMessage(this.state);
-    this.setState({ message: '' });
+    sendMessage(this.state, chatId);
+    this.setState({
+      message: '',
+    });
   }
+
 
   renderMessages() {
     if (this.state.messages.length === 0) {
       return null;
     }
 
-    const user = JSON.parse(localStorage.getItem('userData') || '{}');
-
-
     return this.state.messages.map(message => (
-      <div className="allMessages">
-        <div className={message.whoSend === user.firstname ? 'view__messagesHost' : 'view__messages'} key={message._id}>
+      <div className="allMessages" key={message._id}>
+        <div className={message.whoSend === getFirstName() ? 'view__messagesHost' : 'view__messages'} >
           <fieldset className="messageContent">
             <legend className="whoSend"> {message.whoSend} </legend>
-            <div className="textMessage">
-              {message.text}
-            </div>
-            <div className="timeMessage">
-              {message.sendTime}
+            <div className="message__body">
+              <div className="mini__ava">
+                ava
+              </div>
+              <div className="textMessage">
+                {message.text}
+              </div>
+              <div className="timeMessage">
+                {message.sendTime}
+              </div>
             </div>
           </fieldset>
         </div>
@@ -64,10 +99,10 @@ export default class ChatContainer extends Component {
     return (
       <div className="chat__content">
         <div className="chat__design">
-          <div className="correspondence">
+          <div className="correspondence" ref={(el) => { this.correspondence = el; }}>
             {this.renderMessages()}
           </div>
-          <div className="sedding__messages">
+          <div className="sedding__messages" >
             <input
               className="input__message"
               type="text"
@@ -84,7 +119,7 @@ export default class ChatContainer extends Component {
 }
 
 ChatContainer.propTypes = {
-  onClick: React.PropTypes.func,
+  match: React.PropTypes.object.isRequired,
 };
 ChatContainer.defaultProps = {
   onClick: () => {},

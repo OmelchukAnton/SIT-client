@@ -25,63 +25,66 @@
 
 
 .chat__content {
-    height: 70%;
+    height: 75%;
 
     .chat__design {
         height: 90%;
         background-color: #f5f5ff;
 
-        .sphere {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            border: 1px solid blue;
-            text-align: center;
-        }
-
-        .host {
-            padding: 10px;
-            width: 10%;
-            border: 1px solid grey;
-            border-left: none;
-        }
-
         .correspondence {
             height: 100%;
-            overflow: scroll;
-            overflow-x: hidden;
+            overflow: auto;
 
             .view__messagesHost {
                 display: flex;
+                text-align: right;
+
+                .message__body {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .textMessage {
+                    padding-left: 5px;
+                }
             }
 
             .view__messages {
                 display: flex;
                 justify-content: flex-end;
+
+                .message__body {
+                    display: flex;
+                    flex-direction: row-reverse;
+                }
+
+                .textMessage {
+                    padding-right: 5px;
+                }
+            }
+
+            .messageContent {
+                margin: 5px;
+                border-radius: 9px;
+                // background-color: #4CDAFE;
+                background-color: white;
             }
 
             .whoSend {
             }
 
-            .textMessage {
+            .mini__ava {
+                height: 50px;
+                width: 50px;
+                border: 1px solid blue;
             }
 
             .timeMessage {
+                display: flex;
+                align-items: flex-end;
                 color: #009E5C;
-                text-align: right;
                 font-size: 11px;
             }
-            .messageContent {
-                border-radius: 9px;
-                background-color: #4CDAFE;
-            }
-        }
-
-        .companion {
-            padding: 10px;
-            width: 10%;
-            border: 1px solid grey;
-            border-right: none;
         }
     }
 
@@ -91,7 +94,6 @@
             padding-left: 10px;
             width: 90%;
             height: 30px;
-
         }
 
         .send__message {
