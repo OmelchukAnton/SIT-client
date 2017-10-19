@@ -1,72 +1,66 @@
 import md5 from 'md5';
+import { getUserId, saveUser } from './user.js';
+import * as api from '../api/index.js';
+
+let contacts = {};
 
 export function getContacts() {
-  return fetch('http://localhost:3000/users', {}).then(res => res.json().then(data => data.data));
+  return api.get('/users').then(data => data.data);
+}
+
+export function saveOwnContactsToMemory(data) {
+  contacts = data;
+  return contacts;
 }
 
 export function getOwnContacts() {
-  const user = JSON.parse(localStorage.getItem('userData') || '{}');
-  const url = `http://localhost:3000/users/${user._id}`;
-  return fetch(url, {}).then(res => res.json().then(data => data.data[0].contacts));
+  return api.get(`/users/${getUserId()}`)
+  .then(data => data.data[0].contacts)
+  .then(saveOwnContactsToMemory);
 }
 
 export function getFilterContacts() {
-  const user = JSON.parse(localStorage.getItem('userData') || '{}');
-
-  return fetch(`http://localhost:3000/find/${user._id}`, {}).then(res => res.json()).then(
-    data => data.data,
-  );
+  return api.get(`/find/${getUserId()}`).then(
+    data => data.data);
 }
 
 export function createContact(data) {
-  const _data = data;
-  _data.password = md5(_data.password);
-  return (
-    fetch('http://localhost:3000/reg', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(_data),
-    })
-  ).then(res => res.json());
+  const datas = {
+    ...data,
+    password: md5(data.password),
+  };
+  return api.post('/reg', datas);
 }
 
 export function checkAccount(userData) {
-  const hashedUserData = {
+  const datas = {
     ...userData,
     password: md5(userData.password),
   };
-
-  return (
-    fetch('http://localhost:3000/auth', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(hashedUserData),
-    })
-  ).then(res => res.json()).then((data) => {
+  return api.post('/auth', datas).then((data) => {
     const requireField = data.data && data.data[0];
     if (requireField) {
-      localStorage.setItem('userData', JSON.stringify(requireField));
+      saveUser(JSON.stringify(requireField));
     }
   });
 }
 
 export function addIdNewContact(contact) {
-  const user = JSON.parse(localStorage.getItem('userData') || '{}');
-  const data = {
-    mainId: user._id,
+  const datas = {
+    mainId: getUserId(),
     newContactId: contact._id,
   };
+  return api.post('/addId', datas);
+}
+
+export function addNewAvatar(imageInfo) {
+  const formData = new FormData();
+  formData.append('photo', imageInfo, getUserId());
+
   return (
-    fetch('http://localhost:3000/addId', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    fetch('http://localhost:3000/public', {
       method: 'POST',
-      body: JSON.stringify({ data }),
+      body: formData,
     })
-  ).then(res => res.json());
+  );
 }

@@ -1,23 +1,24 @@
-export function getMessages() {
-  return fetch('http://localhost:3000/messages', {}).then(res => res.json().then(data => data.data[0].messages));
+import * as api from '../api/index.js';
+import { getFirstName } from './user.js';
+
+export function getMessages(chatId) {
+  return api.get(`/messages/${chatId}`).then(
+    data => data.data[0].messages);
 }
 
-export function sendMessage(message) {
-  const user = JSON.parse(localStorage.getItem('userData') || '{}');
-  const time = new Date();
-  const sendTime = `${time.getHours()}:${time.getMinutes()}`
-  const data = {
-    whoSend: user.firstname,
+export function getNewMessages(chatId, lastMessageTime) {
+  return api.get(`/messages/${chatId}?timestamp=${lastMessageTime}`).then(data => data.data);
+}
+
+export function sendMessage(message, chatId) {
+  const user = getFirstName();
+  const time = new Date().getTime();
+
+  const datas = {
+    chatId,
+    whoSend: user,
     text: message.message,
-    sendTime: sendTime,
+    sendTime: time,
   };
-  return (
-    fetch('http://localhost:3000/newMessage', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
-  ).then(res => res.json());
+  return api.post('/newMessage', datas);
 }

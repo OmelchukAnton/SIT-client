@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { sendMessage, getMessages } from '../../services/messages.js';
+import { sendMessage, getMessages, getNewMessages } from '../../services/messages.js';
 import { getFirstName } from '../../services/user.js';
 import './Chats.scss';
 
@@ -19,8 +19,12 @@ export default class ChatContainer extends Component {
   componentDidMount() {
     const { chatId } = this.props.match.params;
     this.getMessages(chatId);
-  }
 
+    this.counter = setInterval(
+      () => this.tick(),
+      1000,
+    );
+  }
 
   componentWillReceiveProps(nextProps) {
     const currentId = this.props.match.params.chatId;
@@ -35,6 +39,10 @@ export default class ChatContainer extends Component {
     this.scrollToBottom();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.counter);
+  }
+
   getMessages(chatId) {
     getMessages(chatId).then((data) => {
       this.setState({
@@ -43,11 +51,22 @@ export default class ChatContainer extends Component {
     });
   }
 
+  tick() {
+    const lastMessageTime = this.state.messages[this.state.messages.length - 1].sendTime;
+    const { chatId } = this.props.match.params;
+
+    getNewMessages(chatId, lastMessageTime).then((data) => {
+      this.setState({
+        messages: [...this.state.messages, ...data],
+      });
+    });
+  }
+
   scrollToBottom() {
-    const scrollHeight = this.correspondence.scrollHeight;
-    const height = this.correspondence.clientHeight;
+    const { scrollHeight, clientHeight } = this.chat__window_dialog;
+    const height = clientHeight;
     const maxScrollTop = scrollHeight - height;
-    this.correspondence.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    this.chat__window_dialog.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
 
   writeMessage({ target }) {
@@ -58,15 +77,16 @@ export default class ChatContainer extends Component {
 
   sendNewMessage() {
     const chatId = this.props.match.params.chatId;
+
     if (this.state.message.length === 0) {
       return;
     }
+
     sendMessage(this.state, chatId);
     this.setState({
       message: '',
     });
   }
-
 
   renderMessages() {
     if (this.state.messages.length === 0) {
@@ -75,9 +95,14 @@ export default class ChatContainer extends Component {
 
     return this.state.messages.map(message => (
       <div className="allMessages" key={message._id}>
-        <div className={message.whoSend === getFirstName() ? 'view__messagesHost' : 'view__messages'} >
-          <fieldset className="messageContent">
-            <legend className="whoSend"> {message.whoSend} </legend>
+        <div
+          className={message.whoSend === getFirstName() ? 'hostsMessages'
+            : 'othersMessages'}
+        >
+          <fieldset className="viewMessage">
+            <legend className="viewMessage__whoSend">
+              {message.whoSend}
+            </legend>
             <div className="message__body">
               <div className="mini__ava">
                 ava
@@ -97,20 +122,28 @@ export default class ChatContainer extends Component {
 
   render() {
     return (
-      <div className="chat__content">
-        <div className="chat__design">
-          <div className="correspondence" ref={(el) => { this.correspondence = el; }}>
+      <div className="chat">
+        <div className="chat__window">
+          <div
+            className="chat__window_dialog"
+            ref={(el) => { this.chat__window_dialog = el; }}
+          >
             {this.renderMessages()}
           </div>
-          <div className="sedding__messages" >
+          <div className="chat__window_send" >
             <input
-              className="input__message"
+              className="chat__window_send_input"
               type="text"
               placeholder="Write a message..."
               onChange={this.writeMessage}
               value={this.state.message}
             />
-            <button className="send__message" onClick={this.sendNewMessage}> Send </button>
+            <button
+              className="chat__window_send_button"
+              onClick={this.sendNewMessage}
+            >
+              Send
+            </button>
           </div>
         </div>
       </div>
@@ -121,6 +154,7 @@ export default class ChatContainer extends Component {
 ChatContainer.propTypes = {
   match: React.PropTypes.object.isRequired,
 };
+
 ChatContainer.defaultProps = {
   onClick: () => {},
 };

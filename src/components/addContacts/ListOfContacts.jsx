@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { getFilterContacts } from './../../services/contacts.js';
 import ContactList from './../contacts/ContactList.jsx';
 import SearchNewContact from './SearchNewContact.jsx';
-import './find.scss';
+import './ListOfNewContacts.scss';
 
 
 export default class ListOfContacts extends Component {
   constructor(props) {
     super(props);
-    this.state = {
 
+    this.state = {
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -23,25 +23,24 @@ export default class ListOfContacts extends Component {
     });
   }
 
-
   handleSearch(value) {
     const { contacts } = this.state;
     const filtered = contacts.filter(
       contact => contact.firstname &&
       contact.firstname.toLowerCase().indexOf(value.toLowerCase()) !== -1,
     );
+
     this.setState({
       filtered,
     });
   }
-
 
   render() {
     return (
       <main className="addContats">
         <div>
           <section>
-            <div className="contacts__list">
+            <div className="addContats__list">
               <SearchNewContact
                 onSearchChange={this.handleSearch}
               />

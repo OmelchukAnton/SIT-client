@@ -1,4 +1,4 @@
-.tada .contacts__list {
+.tada .contactsList {
     height: 68%;
     overflow: auto;
 }
@@ -9,31 +9,31 @@
     }
 }
 
-.view__contact {
+.viewСontact {
     margin-top: 10px;
 
-    .profile__contact {
+    &__profile {
         border: 1px solid grey;
         display: flex;
     	font-family: arial, sans-serif;
     	padding: 5px;
 
-        .contact__avatar {
+        &_avatar {
             width: 60px;
             height: 60px;
             margin-right: 20px;
         }
 
-        .contact__name {
+        &_name {
         	font-size: 20px;
         }
 
-        .contact__time {
+        &_time {
         	font-size: 12px;
         	color: grey;
         }
 
-        .contact__message {
+        &_message {
             font-size: 17px;
         	color: grey;
         }

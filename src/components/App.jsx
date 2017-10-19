@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import ContactList from './contacts/ContactList.jsx';
 import Navigation from './navigation/Navigation.jsx';
+import Owner from './mainUser/Owner.jsx';
 import ChatWindow from './chatBody/ChatWindow.jsx';
+import { getUser } from '../services/user.js';
 import { getOwnContacts } from '../services/contacts.js';
-import MainUser from './mainUser/MainUser.jsx';
 import './App.scss';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
 
-    };
+    this.state = {};
     this.handleSearch = this.handleSearch.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  componentWillMount() {
+    getUser();
   }
 
   componentDidMount() {
@@ -51,12 +55,12 @@ export default class App extends Component {
   render() {
     return (
       <main>
-        <div className="location_chat_and_contacts">
+        <div className="contentSection">
           <section>
             <Navigation
               onSearchChange={this.handleSearch}
             />
-            <MainUser />
+            <Owner />
             <div className="tada">
               <ContactList
                 contacts={this.state.filtered}

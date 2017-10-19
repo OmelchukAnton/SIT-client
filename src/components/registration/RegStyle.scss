@@ -1,20 +1,12 @@
-.reg__page {
-    .header__registration {
+.regPage {
+    &__header {
         overflow: hidden;
         border: 1px solid #ccc;
         background-color: #f1f1f1;
         display: flex;
 
-        .header_reg_logo {
+        &_logo {
             padding: 30px;
-        }
-
-        .sign__switching {
-            button {
-                margin: 20px;
-                width: 70px;
-                height: 40px;
-            }
         }
     }
 }

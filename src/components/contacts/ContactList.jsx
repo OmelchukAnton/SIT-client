@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { addIdNewContact } from './../../services/contacts.js';
 import Contact from './Contact.jsx';
 import './ContactStyle.scss';
 import '../addContacts/ListOfContacts.jsx';
-import { addIdNewContact } from './../../services/contacts.js';
 
 function onAddNewItem(contact) {
   addIdNewContact(contact);
@@ -12,6 +12,7 @@ function onAddNewItem(contact) {
 export default class ContactList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       contacts: '',
     };
@@ -25,12 +26,11 @@ export default class ContactList extends Component {
   render() {
     const renderContactLink = (contact, i) =>
       <div className="selected__user" key={i}>
-        <Link to={`/pm/${contact.firstname}`}>
+        <Link to={`/pm/${contact.chatId}`}>
           <Contact
             name={`${contact.firstname} ${contact.lastname}`}
             // avatar={contact.avatar}
             // message={contact.message}
-            // time={(contact.time || '').toString()}
             onClick={this.handleItemClick}
           />
           {this.props.isAddContactAvailible ?
@@ -43,8 +43,9 @@ export default class ContactList extends Component {
     if (this.props.contacts.length === 0) {
       return <div>загрузка контактов..</div>;
     }
+
     return (
-      <div className="contacts__list">
+      <div className="contactsList">
         {this.props.contacts.map(renderContactLink)}
       </div>
     );
@@ -52,10 +53,13 @@ export default class ContactList extends Component {
 }
 
 ContactList.propTypes = {
-  contacts: React.PropTypes.string.isRequired,
-  onItemClick: React.PropTypes.func.isRequired,
-  isAddContactAvailible: React.PropTypes.string.isRequired,
+  contacts: React.PropTypes.array.isRequired,
+  onItemClick: React.PropTypes.func,
+  isAddContactAvailible: React.PropTypes.string,
 };
+
 ContactList.defaultProps = {
-  contacts: '',
+  contacts: [],
+  onItemClick: () => {},
+  isAddContactAvailible: '',
 };

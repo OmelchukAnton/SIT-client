@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './ListOfNewContacts.scss';
 
 export default class SearchNewContact extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       search: '',
     };
@@ -19,12 +21,12 @@ export default class SearchNewContact extends Component {
 
   render() {
     return (
-      <div className="header_find_contacts">
+      <div className="searchContacts">
         <Link to="/pm">
-          <button className="return_to_pm">return to my page</button>
+          <button className="searchContacts__returnBack">return to my page</button>
         </Link>
         <input
-          className="search_users"
+          className="searchContacts__inputSearch"
           type="text"
           placeholder="Search for users"
           value={this.state.search}
@@ -34,6 +36,7 @@ export default class SearchNewContact extends Component {
     );
   }
 }
+
 SearchNewContact.propTypes = {
   onSearchChange: React.PropTypes.func.isRequired,
 };

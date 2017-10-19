@@ -15,27 +15,27 @@ export default class ChatWindow extends Component {
 
   render() {
     if (!this.props.contact) {
-      return <div className="nav_over_chatwindow"> News </div>;
+      return <div className="chatNav"> News </div>;
     }
 
     return (
-      <div className="nav_over_chatwindow">
+      <div className="chatNav">
         <Link to="/pm">
-          <div className="return__back">
+          <div className="chatNav__toNews">
             <button onClick={this.handleBackClick} />
           </div>
         </Link>
-        <div className="chat_with_user"> Send a message {this.props.contact} </div>
+        <div className="chatNav__toUser"> Send a message {this.props.contact} </div>
       </div>
     );
   }
 }
 
-
 ChatWindow.propTypes = {
   onClick: React.PropTypes.func.isRequired,
   contact: React.PropTypes.string,
 };
+
 ChatWindow.defaultProps = {
   contact: '',
 };

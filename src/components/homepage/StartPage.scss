@@ -3,32 +3,30 @@
     background-color: #01B8A4;
     color: white;
 
-    .homepage__head {
+    &__head {
         height: 20%;
 
-        .homepage__greeting {
-            // padding-top: 30px;
+        &_greating {
             text-align: center;
             font-size: 40px;
         }
-        .homepage_greeting_info {
+        &_greatingInfo {
             padding-left: 60%;
             font-size: 25px;
             margin: 20px 0;
         }
     }
 
-    .homepage_content {
+    &__content {
         columns: 3;
         background-color: #305075;
 
-        .left_side_content {
+        &_left {
             height: 80%;
 
             .picture__one {
                 margin-top: 30px;
                 border-radius: 100px;
-                box-shadow: 0 0 0 3px yellow, 0 0 13px #333; /* Параметры теней */
                 transform: rotate(-20deg);
             }
             .picture__two {
@@ -38,7 +36,7 @@
                 transform: rotate(-15deg);
             }
         }
-        .center {
+        &_center {
             padding-top: 10px;
             height: 80%;
 
@@ -47,10 +45,10 @@
             }
         }
 
-        .form__reg {
+        &_regForm {
             height: 80%;
 
-            .button_goto_registration {
+            &_btn {
                 box-shadow: 0 0 0 3px white, 0 0 13px #333;
                 background-color: #60e035;
                 margin: 10px;

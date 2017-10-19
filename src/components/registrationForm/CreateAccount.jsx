@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Button } from 'react-validation/lib/build/validation.rc.js';
+import { Form, Input, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
-import { createContact, createNewChat } from '../../services/contacts.js';
-// import { createNewChat } from '../../services/contacts.js';
+import { createContact } from '../../services/contacts.js';
 import './CreateAcc.scss';
 
 
@@ -13,20 +12,16 @@ export default class CreateAccount extends Component {
     this.state = {
       firstname: '',
       lastname: '',
-      city: '',
       email: '',
       password: '',
       passwordConfirm: '',
     };
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onAddNewAccount = this.onAddNewAccount.bind(this);
   }
 
-
   onAddNewAccount() {
     createContact(this.state);
-    // createNewChat(this.state);
   }
 
   handleInputChange(event) {
@@ -37,14 +32,14 @@ export default class CreateAccount extends Component {
 
   newContact() {
     return (
-      <main className="form_create_account">
+      <main className="formCreateAcc">
         <Form>
           <h3>Create a new account</h3>
-          <p className="required">*All fields are required.</p>
-          <label htmlFor="firstname" className="field_group">
-            <div className="blocks">
+          <p className="formCreateAcc__required">*All fields are required.</p>
+          <label htmlFor="firstname" className="formCreateAcc__group">
+            <div className="formCreateAcc__group_blocks">
               <Input
-                className="inputs_group"
+                className="formCreateAcc__group_blocks_inputs"
                 errorClassName="is-invalid-input"
                 type="text"
                 placeholder="Firstname"
@@ -56,11 +51,10 @@ export default class CreateAccount extends Component {
               />
             </div>
           </label>
-          <label htmlFor="lastname" className="field_group">
-            <div className="blocks">
-              {/* Lastname: */}
+          <label htmlFor="lastname" className="formCreateAcc__group">
+            <div className="formCreateAcc__group_blocks">
               <Input
-                className="inputs_group"
+                className="formCreateAcc__group_blocks_inputs"
                 errorClassName="is-invalid-input"
                 type="text"
                 placeholder="Lastname"
@@ -72,42 +66,24 @@ export default class CreateAccount extends Component {
               />
             </div>
           </label>
-          <label htmlFor="city" className="field_group">
-            <div className="blocks">
-              City:
-              <Select
-                className="inputs_group"
-                errorClassName="is-invalid-input"
-                name="city"
-                value=""
-                onChange={this.handleCityTick}
-                validations={['required']}
-              >
-                <option value="">Choose your city</option>
-                <option value="1">Brest</option>
-                <option value="2">Minsk</option>
-                <option value="3">New York</option>
-              </Select>
-            </div>
-          </label>
-          <label htmlFor="email" className="field_group">
-            <div className="blocks">
+          <label htmlFor="email" className="formCreateAcc__group">
+            <div className="formCreateAcc__group_blocks">
               Email:
               <Input
-                className="inputs_group"
-                value="email@email.com"
-                // placeholder="email@email.com"
+                className="formCreateAcc__group_blocks_inputs"
+                value=""
+                placeholder="email@email.com"
                 onChange={this.handleInputChange}
                 name="email"
                 validations={['required', 'email']}
               />
             </div>
           </label>
-          <label htmlFor="password" className="field_group">
-            <div className="blocks">
+          <label htmlFor="password" className="formCreateAcc__group">
+            <div className="formCreateAcc__group_blocks">
               Password:
               <Input
-                className="inputs_group"
+                className="formCreateAcc__group_blocks_inputs"
                 type="password"
                 placeholder="*****"
                 value=""
@@ -117,10 +93,10 @@ export default class CreateAccount extends Component {
               />
             </div>
           </label>
-          <label htmlFor="confirm" className="field_group">
-            <div className="blocks">
+          <label htmlFor="confirm" className="formCreateAcc__group">
+            <div className="formCreateAcc__group_blocks">
               <Input
-                className="inputs_group"
+                className="formCreateAcc__group_blocks_inputs"
                 type="password"
                 placeholder="Confirm password"
                 errorClassName="is-invalid-input"
@@ -132,7 +108,7 @@ export default class CreateAccount extends Component {
               />
             </div>
           </label>
-          <div className="button_create_account">
+          <div className="formCreateAcc__buttonCreateAcc">
             <Link to="/" >
               <Button onClick={this.onAddNewAccount}> Create an account. </Button>
             </Link>
@@ -141,6 +117,7 @@ export default class CreateAccount extends Component {
       </main>
     );
   }
+
   render() {
     return (
       <div>
@@ -149,17 +126,17 @@ export default class CreateAccount extends Component {
     );
   }
 }
+
 CreateAccount.propTypes = {
   firstname: React.PropTypes.string,
   lastname: React.PropTypes.string,
-  city: React.PropTypes.string,
   email: React.PropTypes.string,
   password: React.PropTypes.string,
 };
+
 CreateAccount.defaultProps = {
   firstname: '',
   lastname: '',
-  city: '',
   email: '',
   password: '',
 };

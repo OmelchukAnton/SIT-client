@@ -1,4 +1,4 @@
-.nav_over_chatwindow {
+.chatNav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     height: 200px;
     font-size: 20px;
 
-    .return__back {
+    &__toNews {
         button {
             background-color: #C9ADDF;
             border-right: 0;
@@ -17,41 +17,28 @@
         }
     }
 
-    .chat_with_user {
+    &__toUser {
         text-align: center;
         flex-grow: 1;
     }
 }
 
 
-.chat__content {
+.chat {
     height: 75%;
 
-    .chat__design {
+    &__window {
         height: 90%;
         background-color: #f5f5ff;
 
-        .correspondence {
+        &_dialog {
             height: 100%;
             overflow: auto;
 
-            .view__messagesHost {
-                display: flex;
-                text-align: right;
-
-                .message__body {
-                    display: flex;
-                    flex-direction: row;
-                }
-
-                .textMessage {
-                    padding-left: 5px;
-                }
-            }
-
-            .view__messages {
+            .hostsMessages {
                 display: flex;
                 justify-content: flex-end;
+                text-align: right;
 
                 .message__body {
                     display: flex;
@@ -63,14 +50,28 @@
                 }
             }
 
-            .messageContent {
+            .othersMessages {
+                display: flex;
+
+                .message__body {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .textMessage {
+                    padding-left: 5px;
+                }
+            }
+
+            .viewMessage {
                 margin: 5px;
                 border-radius: 9px;
                 // background-color: #4CDAFE;
                 background-color: white;
-            }
 
-            .whoSend {
+                &__whoSend {
+
+                }
             }
 
             .mini__ava {
@@ -86,20 +87,20 @@
                 font-size: 11px;
             }
         }
-    }
 
-    .sedding__messages {
+        &_send {
 
-        .input__message {
-            padding-left: 10px;
-            width: 90%;
-            height: 30px;
-        }
+            &_input {
+                padding-left: 10px;
+                width: 90%;
+                height: 30px;
+            }
 
-        .send__message {
-            width: 10%;
-            background-color: #7485af;
-            height: 30px;
+            &_button {
+                width: 10%;
+                background-color: #7485af;
+                height: 30px;
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ function onExitClick() {
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       search: '',
     };
@@ -19,28 +20,27 @@ export default class Navigation extends Component {
     this.setState({
       search: target.value,
     });
-
     this.props.onSearchChange(target.value);
   }
 
   render() {
     return (
-      <section className="Navigation_over_contacts">
-        <div className="nav__block">
-          <div className="general__info">
-            <div className="name__app">
+      <section className="navMainUser">
+        <div className="navMainUser__block">
+          <div className="navMainUser__block_general">
+            <div className="navMainUser__block_general_nameApp">
               Stay in touch!
             </div>
-            <div className="action__nav">
+            <div className="navMainUser__block_general_action">
               <input
-                className="nav_search_users"
+                className="navMainUser__block_general_action_search"
                 type="text"
                 placeholder="Search for users"
                 value={this.state.search}
                 onChange={this.updateSearch}
               />
               <Link to="/">
-                <button className="nav__dropdown" onClick={onExitClick}>
+                <button className="navMainUser__block_general_action_exit" onClick={onExitClick}>
                    exit
                  </button>
               </Link>
@@ -51,6 +51,7 @@ export default class Navigation extends Component {
     );
   }
 }
+
 Navigation.propTypes = {
   onSearchChange: React.PropTypes.func.isRequired,
 };
