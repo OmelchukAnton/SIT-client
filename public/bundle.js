@@ -15567,8 +15567,8 @@ var HomeLayout = function HomeLayout() {
 };
 
 (0, _reactDom.render)(_react2.default.createElement(
-  _reactRouterDom.BrowserRouter,
-  { className: 'App', history: _reactHistory.BrowserHistory },
+  _reactRouterDom.HashRouter,
+  { className: 'App' },
   _react2.default.createElement(
     'div',
     null,
