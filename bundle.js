@@ -9154,9 +9154,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.get = get;
 exports.post = post;
-var apiEndpoint = 'http://localhost:5000';
-// const apiEndpoint = 'https://glacial-basin-12371.herokuapp.com';
-
+var apiEndpoint = 'https://glacial-basin-12371.herokuapp.com';
 
 function get(url) {
   return fetch('' + apiEndpoint + url).then(function (res) {
