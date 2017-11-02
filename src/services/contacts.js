@@ -38,7 +38,7 @@ export function checkAccount(userData) {
     password: md5(userData.password),
   };
   return api.post('/auth', datas).then((data) => {
-    const requireField = data.data && data.data[0];
+    const requireField = data.data[0];
     if (requireField) {
       saveUser(JSON.stringify(requireField));
     }
@@ -58,7 +58,7 @@ export function addNewAvatar(imageInfo) {
   formData.append('photo', imageInfo, getUserId());
 
   return (
-    fetch('http://localhost:3000/public', {
+    fetch('http://localhost:5000/public', {
       method: 'POST',
       body: formData,
     })

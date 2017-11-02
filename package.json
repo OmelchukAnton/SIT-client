@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "eslint src/index.js || true",
-    "build": "webpack-dev-server --content-base ./public --inline --hot --history-api-fallback"
+    "eslint": "eslint public/index.js || true",
+    "start": "webpack-dev-server --content-base ./public --inline --hot --history-api-fallback",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "html-webpack-plugin": "^2.30.1",
     "md5": "^2.2.1",
     "node-sass": "^4.5.2",
     "react-hot-loader": "^1.3.1",

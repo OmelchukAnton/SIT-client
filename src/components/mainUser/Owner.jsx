@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstName, getLastName, getEmail } from '../../services/user.js';
+import { getFirstName, getLastName, getEmail, getUserId } from '../../services/user.js';
 import { addNewAvatar } from '../../services/contacts.js';
 import './Owner.scss';
 
@@ -9,18 +9,17 @@ export default class Owner extends Component {
     super(props);
 
     this.state = {
-      imagePreviewUrl: '',
       file: '',
     };
   }
 
-  _handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
     const imageInfo = this.state.file;
     addNewAvatar(imageInfo);
   }
 
-  _handleImageChange(e) {
+  handleImageChange(e) {
     e.preventDefault();
 
     const reader = new FileReader();
@@ -29,7 +28,6 @@ export default class Owner extends Component {
     reader.onloadend = () => {
       this.setState({
         file,
-        imagePreviewUrl: reader.result,
       });
     };
 
@@ -37,20 +35,13 @@ export default class Owner extends Component {
   }
 
   render() {
-    const { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} alt="pic" />);
-    } else {
-      $imagePreview = (<div className="previewText"> refresh photo </div>);
-    }
-
+    const urlAva = `http://localhost:5000/${getUserId()}.jpeg`;
     return (
       <div className="mainUser">
         <div className="mainUser__info">
           <div className="mainUser__info_profile">
             <div className="mainUser__info_profile_img">
-              {$imagePreview}
+              <img src={urlAva} alt="avatar" />
             </div>
           </div>
           <section className="mainUser__info_data">
@@ -63,13 +54,13 @@ export default class Owner extends Component {
             <div>
               email: {getEmail()}
             </div>
-            <form className="mainUser__info_data_image" onSubmit={e => this._handleSubmit(e)}>
+            <form className="mainUser__info_data_image" onSubmit={e => this.handleSubmit(e)}>
               <input
                 className="fileInput"
                 type="file"
-                onChange={e => this._handleImageChange(e)}
+                onChange={e => this.handleImageChange(e)}
               />
-              <button className="submitButton" type="submit" onClick={e => this._handleSubmit(e)}>
+              <button className="submitButton" type="submit" onClick={e => this.handleSubmit(e)}>
                 Upload
               </button>
             </form>

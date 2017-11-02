@@ -1,18 +1,50 @@
 .addContats {
-    &__list {
+    background-color: #EDEEF0;
+    &__search {
 
+    }
+
+    &__list {
+        display: flex;
+        // background-color: #9ACDE2;
+        margin: 0% 15%;
     }
 }
 
 .searchContacts {
-    height: 200px;
-    background-color: green;
+    height: 180px;
+    border: 10px solid grey;
 
-    &__returnBack {
-
+    &__appName {
+        padding: 10px 0px 0px  10px;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: monospace;
+        border-bottom: 2px solid;
+        color: #FFFFFF;
+        background-color: #5e8ed6;
+        p {
+            font-size: 30px;
+            text-align: center;
+        }
     }
 
-    &__inputSearch{
 
+    &__returnBack {
+        height: 50px;
+        width: 14.5%;
+        background-color: #99e8a6;
+        justify-content: center;
+    }
+
+    &__inputSearch {
+        height: 50px;
+        width: 85.5%;
+        padding-left: 10px;
+        background-color: #E8E8E8;
+
+        &:focus {
+            background-color: #FFFFFF;
+        }
     }
 }

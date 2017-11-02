@@ -4,7 +4,7 @@
     justify-content: center;
     color: white;
     background-color: #C9ADDF;
-    height: 200px;
+    height: 180px;
     font-size: 20px;
 
     &__toNews {
@@ -25,7 +25,7 @@
 
 
 .chat {
-    height: 75%;
+    height: 70%;
 
     &__window {
         height: 90%;
@@ -41,12 +41,10 @@
                 text-align: right;
 
                 .message__body {
-                    display: flex;
-                    flex-direction: row-reverse;
+                    text-align: left;
                 }
 
                 .textMessage {
-                    padding-right: 5px;
                 }
             }
 
@@ -54,12 +52,9 @@
                 display: flex;
 
                 .message__body {
-                    display: flex;
-                    flex-direction: row;
                 }
 
                 .textMessage {
-                    padding-left: 5px;
                 }
             }
 
@@ -67,22 +62,15 @@
                 margin: 5px;
                 border-radius: 9px;
                 // background-color: #4CDAFE;
-                background-color: white;
+                background-color: #8edaed;
 
                 &__whoSend {
-
                 }
             }
 
-            .mini__ava {
-                height: 50px;
-                width: 50px;
-                border: 1px solid blue;
-            }
-
             .timeMessage {
-                display: flex;
-                align-items: flex-end;
+                text-align: right;
+                padding-top: 5px;
                 color: #009E5C;
                 font-size: 11px;
             }

@@ -1,10 +1,14 @@
 const path = require('path');
 
+const PATHS = {
+  public: path.join(__dirname, 'public'),
+  build: path.join(__dirname, 'build')
+};
+
 module.exports = {
-    entry: path.join(__dirname, 'src', 'index.jsx'),
+    entry: path.resolve('./src/index.jsx'),
     output: {
-        path: path.resolve(__dirname, "public"),
-        publicPath: '/',
+        path: path.resolve('./public'),
         filename: 'bundle.js'
     },
     devtool: 'source-map',

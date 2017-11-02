@@ -52,14 +52,22 @@ export default class ChatContainer extends Component {
   }
 
   tick() {
-    const lastMessageTime = this.state.messages[this.state.messages.length - 1].sendTime;
-    const { chatId } = this.props.match.params;
-
-    getNewMessages(chatId, lastMessageTime).then((data) => {
-      this.setState({
-        messages: [...this.state.messages, ...data],
+    if (this.state.messages.length === 0) {
+      getNewMessages().then((data) => {
+        this.setState({
+          messages: data,
+        });
       });
-    });
+    } else {
+      const lastMessage = this.state.messages[this.state.messages.length - 1];
+      const lastMessageTime = lastMessage.sendTime;
+      const { chatId } = this.props.match.params;
+      getNewMessages(chatId, lastMessageTime).then((data) => {
+        this.setState({
+          messages: [...this.state.messages, ...data],
+        });
+      });
+    }
   }
 
   scrollToBottom() {
@@ -104,9 +112,6 @@ export default class ChatContainer extends Component {
               {message.whoSend}
             </legend>
             <div className="message__body">
-              <div className="mini__ava">
-                ava
-              </div>
               <div className="textMessage">
                 {message.text}
               </div>

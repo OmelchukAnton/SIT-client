@@ -40,14 +40,16 @@ export default class ListOfContacts extends Component {
       <main className="addContats">
         <div>
           <section>
-            <div className="addContats__list">
+            <div className="addContats__search">
               <SearchNewContact
                 onSearchChange={this.handleSearch}
               />
-              <ContactList
-                contacts={this.state.filtered}
-                isAddContactAvailible="true"
-              />
+              <div className="addContats__list">
+                <ContactList
+                  contacts={this.state.filtered}
+                  isAddContactAvailible="true"
+                />
+              </div>
             </div>
           </section>
         </div>

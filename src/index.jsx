@@ -16,13 +16,6 @@ const HomeLayout = () => (
 );
 
 render(
-  <Router className="App" history={BrowserHistory}>
-    <div>
-      <Route exact path="/" component={MainPage} />
-      <Route path="/pm" component={HomeLayout} />
-      <Route path="/reg" component={RegistrationPage} />
-      <Route path="/find" component={ListOfContacts} />
-    </div>
-  </Router>,
+  <div>Tests</div>,
   document.getElementById('root'),
 );

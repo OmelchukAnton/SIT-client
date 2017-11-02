@@ -12,10 +12,10 @@ export default class Login extends Component {
       password: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.AccountVerification = this.AccountVerification.bind(this);
+    this.accountVerification = this.accountVerification.bind(this);
   }
 
-  AccountVerification() {
+  accountVerification() {
     checkAccount(this.state);
   }
 
@@ -60,7 +60,7 @@ export default class Login extends Component {
               </label>
             </div>
             <div>
-              <Button onClick={this.AccountVerification} className="login__fieldset_form_button">
+              <Button onClick={this.accountVerification} className="login__fieldset_form_button">
                 Enter
               </Button>
             </div>

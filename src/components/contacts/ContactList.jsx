@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { addIdNewContact } from './../../services/contacts.js';
 import Contact from './Contact.jsx';
-import './ContactStyle.scss';
 import '../addContacts/ListOfContacts.jsx';
+import './ContactStyle.scss';
 
 function onAddNewItem(contact) {
   addIdNewContact(contact);
@@ -25,12 +25,11 @@ export default class ContactList extends Component {
 
   render() {
     const renderContactLink = (contact, i) =>
-      <div className="selected__user" key={i}>
+      <div className="selectUser" key={i}>
         <Link to={`/pm/${contact.chatId}`}>
           <Contact
             name={`${contact.firstname} ${contact.lastname}`}
-            // avatar={contact.avatar}
-            // message={contact.message}
+            id={contact._id}
             onClick={this.handleItemClick}
           />
           {this.props.isAddContactAvailible ?

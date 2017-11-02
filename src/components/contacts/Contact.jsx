@@ -13,17 +13,19 @@ export default class Contact extends Component {
   }
 
   render() {
-    const { avatar, name, message, time } = this.props;
+    const { name, id } = this.props;
     return (
       <div className="viewСontact" onClick={this.handleItemClick}>
         <div className="viewСontact__profile">
           <div>
-            <img className="viewСontact__profile_avatar" alt="avatar" src={avatar} />
+            <img
+              className="viewСontact__profile_avatar"
+              alt="avatar"
+              src={`http://localhost:5000/${id}.jpeg`}
+            />
           </div>
           <div>
             <div className="viewСontact__profile_name" >{name}</div>
-            <div className="viewСontact__profile_message">{message}</div>
-            <div className="viewСontact__profile_time">{time}</div>
           </div>
         </div>
       </div>
@@ -32,16 +34,12 @@ export default class Contact extends Component {
 }
 
 Contact.propTypes = {
-  avatar: React.PropTypes.string,
+  id: React.PropTypes.string,
   name: React.PropTypes.string,
-  message: React.PropTypes.string,
-  time: React.PropTypes.string,
   onClick: React.PropTypes.func.isRequired,
 };
 
 Contact.defaultProps = {
-  avatar: '',
   name: '',
-  message: '',
-  time: '',
+  id: '',
 };

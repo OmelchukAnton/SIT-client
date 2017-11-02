@@ -1,9 +1,16 @@
 .tada .contactsList {
-    height: 68%;
+    height: 70%;
     overflow: auto;
 }
 
-.selected__user {
+.selectUser {
+
+    button {
+        width: 100%;
+        height: 30px;
+        background-color: #24b72c;
+    }
+
     &:active {
         box-shadow: 2px 0px 10px blue;
     }

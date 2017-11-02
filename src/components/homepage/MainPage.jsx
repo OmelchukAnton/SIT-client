@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-// import { myUser } from '../../services/user.js';
 import Login from './../login/Login.jsx';
 import './StartPage.scss';
 
@@ -8,16 +7,17 @@ export class HomePage extends Component {
 
   componentWillMount() {
     const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
-    if (Object.keys(userAuth).length) {
+    if (Object.keys(userAuth).length !== 0) {
       this.props.history.push('/pm');
     }
+    // alert('Incorrect email or password');
   }
 
   render() {
     return (
       <main className="homepage">
         <article className="homepage__head">
-          <h2 className="homepage__head_greating">Welcome! </h2>
+          <h2 className="homepage__head_greating"> Welcome! </h2>
           <p className="homepage__head_greatingInfo"> Glad you are here... </p>
         </article>
         <section className="homepage__content">
@@ -33,6 +33,8 @@ export class HomePage extends Component {
             <Link to="/reg">
               <button className="homepage__content_regForm_btn">R e g i s t r a t i o n</button>
             </Link>
+          </div>
+          <div>
             <Login />
           </div>
         </section>
@@ -42,7 +44,7 @@ export class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  history: React.PropTypes.func.isRequired,
+  history: React.PropTypes.object.isRequired,
 };
 
 export default withRouter(HomePage);

@@ -1,4 +1,6 @@
-const apiEndpoint = 'http://localhost:3000';
+const apiEndpoint = 'http://localhost:5000';
+// const apiEndpoint = 'https://glacial-basin-12371.herokuapp.com';
+
 
 export function get(url) {
   return fetch(`${apiEndpoint}${url}`).then(res => res.json());

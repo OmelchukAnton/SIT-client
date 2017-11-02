@@ -22,6 +22,10 @@ export default class SearchNewContact extends Component {
   render() {
     return (
       <div className="searchContacts">
+        <div className="searchContacts__appName">
+          Stay in touch!
+          <p>add new contacts</p>
+        </div>
         <Link to="/pm">
           <button className="searchContacts__returnBack">return to my page</button>
         </Link>
