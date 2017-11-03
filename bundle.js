@@ -14129,7 +14129,17 @@ var ChatContainer = function (_Component) {
               type: 'text',
               placeholder: 'Write a message...',
               onChange: this.writeMessage,
-              value: this.state.message
+              value: this.state.message,
+              ref: function ref(input) {
+                if (input != null) {
+                  input.focus();
+                }
+              },
+              onKeyPress: function onKeyPress(event) {
+                if (event.key === 'Enter') {
+                  _this5.sendNewMessage();
+                }
+              }
             }),
             _react2.default.createElement(
               'button',
@@ -14817,6 +14827,8 @@ var Login = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -14868,7 +14880,12 @@ var Login = function (_Component) {
                     value: '',
                     onChange: this.handleInputChange,
                     name: 'password',
-                    validations: ['required']
+                    validations: ['required'],
+                    onKeyPress: function onKeyPress(event) {
+                      if (event.key === 'Enter') {
+                        _this3.accountVerification();
+                      }
+                    }
                   })
                 )
               ),
