@@ -69,6 +69,11 @@ class Login extends Component {
                     onChange={this.handleInputChange}
                     name="password"
                     validations={['required']}
+                    onKeyPress={(event) => {
+                      if (event.key === 'Enter') {
+                        this.accountVerification();
+                      }
+                    }}
                   />
                 </label>
               </div>

@@ -143,6 +143,16 @@ export default class ChatContainer extends Component {
               placeholder="Write a message..."
               onChange={this.writeMessage}
               value={this.state.message}
+              ref={(input) => {
+                if (input != null) {
+                  input.focus();
+                }
+              }}
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  this.sendNewMessage();
+                }
+              }}
             />
             <button
               className="chat__window_send_button"
