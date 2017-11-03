@@ -52,8 +52,10 @@ export default class ChatContainer extends Component {
   }
 
   tick() {
+    const { chatId } = this.props.match.params;
+
     if (this.state.messages.length === 0) {
-      getNewMessages().then((data) => {
+      getNewMessages(chatId, 0).then((data) => {
         this.setState({
           messages: data,
         });
@@ -61,7 +63,6 @@ export default class ChatContainer extends Component {
     } else {
       const lastMessage = this.state.messages[this.state.messages.length - 1];
       const lastMessageTime = lastMessage.sendTime;
-      const { chatId } = this.props.match.params;
       getNewMessages(chatId, lastMessageTime).then((data) => {
         this.setState({
           messages: [...this.state.messages, ...data],

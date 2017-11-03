@@ -1964,6 +1964,65 @@ module.exports = ReactCurrentOwner;
 
 /***/ }),
 /* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(256);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(257);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(107);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(258);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(259);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(260);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(261);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(262);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(263);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(264);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(265);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(266);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(267);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2235,65 +2294,6 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
   }
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(256);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(257);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(107);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(258);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(259);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(260);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(261);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(262);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(263);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(264);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(265);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(266);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(267);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 /* 20 */
@@ -3618,10 +3618,10 @@ function saveUser(user) {
 }
 
 function getUser() {
-  if (!myUser) {
-    myUser = JSON.parse(localStorage.getItem('userData') || '{}');
-  }
-  return myUser;
+  // if (!myUser) {
+  //   return myUser;
+  // }
+  myUser = JSON.parse(localStorage.getItem('userData') || '{}');
 }
 
 /***/ }),
@@ -4209,7 +4209,7 @@ module.exports = ReactInstanceMap;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 var getEventTarget = __webpack_require__(59);
 
@@ -9154,6 +9154,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.get = get;
 exports.post = post;
+// const apiEndpoint = 'http://localhost:5000';
 var apiEndpoint = 'https://glacial-basin-12371.herokuapp.com';
 
 function get(url) {
@@ -9191,7 +9192,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _contacts = __webpack_require__(25);
 
@@ -9234,6 +9235,9 @@ var ContactList = function (_Component) {
     key: 'handleItemClick',
     value: function handleItemClick(contact) {
       this.props.onItemClick(contact);
+      // .then(id => {
+      //   this.props.router.push('')
+      // });
     }
   }, {
     key: 'render',
@@ -14000,8 +14004,11 @@ var ChatContainer = function (_Component) {
     value: function tick() {
       var _this4 = this;
 
+      var chatId = this.props.match.params.chatId;
+
+
       if (this.state.messages.length === 0) {
-        (0, _messages.getNewMessages)().then(function (data) {
+        (0, _messages.getNewMessages)(chatId, 0).then(function (data) {
           _this4.setState({
             messages: data
           });
@@ -14009,8 +14016,6 @@ var ChatContainer = function (_Component) {
       } else {
         var lastMessage = this.state.messages[this.state.messages.length - 1];
         var lastMessageTime = lastMessage.sendTime;
-        var chatId = this.props.match.params.chatId;
-
         (0, _messages.getNewMessages)(chatId, lastMessageTime).then(function (data) {
           _this4.setState({
             messages: [].concat(_toConsumableArray(_this4.state.messages), _toConsumableArray(data))
@@ -14172,7 +14177,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _Login = __webpack_require__(136);
 
@@ -14232,8 +14237,8 @@ var HomePage = exports.HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'homepage__content_left' },
-            _react2.default.createElement('img', { src: './images/lists.jpg', alt: 'example-listOfContacts', className: 'picture__one' }),
-            _react2.default.createElement('img', { src: './images/chat.jpg', alt: 'example-chat', className: 'picture__two' })
+            _react2.default.createElement('img', { src: './images/lists.jpeg', alt: 'example-listOfContacts', className: 'picture__one' }),
+            _react2.default.createElement('img', { src: './images/chat.jpeg', alt: 'example-chat', className: 'picture__two' })
           ),
           _react2.default.createElement(
             'div',
@@ -14460,7 +14465,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 __webpack_require__(112);
 
@@ -14560,7 +14565,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 __webpack_require__(113);
 
@@ -14752,6 +14757,8 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(18);
+
 var _validationRc = __webpack_require__(65);
 
 var _contacts = __webpack_require__(25);
@@ -14785,106 +14792,27 @@ var Login = function (_Component) {
     return _this;
   }
 
+  // componentWillMount() {
+  //   const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
+  //   if (Object.keys(userAuth).length !== 0) {
+  //     this.props.history.push('/pm');
+  //   }
+  //   // alert('Incorrect email or password');
+  // }
+
   _createClass(Login, [{
-    key: 'accountVerification',
-    value: function accountVerification() {
-      (0, _contacts.checkAccount)(this.state);
-    }
-  }, {
     key: 'handleInputChange',
     value: function handleInputChange(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
     }
   }, {
-    key: 'checkAccount',
-    value: function checkAccount() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'login' },
-        _react2.default.createElement(
-          'fieldset',
-          { className: 'login__fieldset' },
-          _react2.default.createElement(
-            _validationRc.Form,
-            { className: 'login__fieldset_form' },
-            _react2.default.createElement(
-              'div',
-              { className: 'login__fieldset_form_info' },
-              _react2.default.createElement(
-                'h2',
-                null,
-                ' Authorization '
-              ),
-              _react2.default.createElement(
-                'summary',
-                { className: 'login__fieldset_form_info_summary' },
-                'Enter your registration information to enter your personal account.'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'email', className: 'login__fieldset_form_inputs' },
-                _react2.default.createElement(_validationRc.Input, {
-                  className: 'login__fieldset_form_inputs_email',
-                  placeholder: 'email@email.com',
-                  value: '',
-                  onChange: this.handleInputChange,
-                  name: 'email',
-                  validations: ['required', 'email']
-                })
-              ),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'password', className: 'login__fieldset_form_inputs' },
-                _react2.default.createElement(_validationRc.Input, {
-                  className: 'login__fieldset_form_inputs_password',
-                  type: 'password',
-                  placeholder: '******',
-                  value: '',
-                  onChange: this.handleInputChange,
-                  name: 'password',
-                  validations: ['required']
-                })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _validationRc.Button,
-                { onClick: this.accountVerification, className: 'login__fieldset_form_button' },
-                'Enter'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'login__fieldset_form_entry' },
-              _react2.default.createElement(
-                'aside',
-                null,
-                ' Enter through: '
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'login__fieldset_form_entry_passport' },
-                _react2.default.createElement(
-                  'summary',
-                  null,
-                  ' Facebook '
-                ),
-                _react2.default.createElement(
-                  'summary',
-                  null,
-                  ' Google+ '
-                )
-              )
-            )
-          )
-        )
-      );
+    key: 'accountVerification',
+    value: function accountVerification() {
+      var _this2 = this;
+
+      (0, _contacts.checkAccount)(this.state).then(function () {
+        _this2.props.history.push('/pm');
+      });
     }
   }, {
     key: 'render',
@@ -14892,7 +14820,93 @@ var Login = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        this.checkAccount()
+        _react2.default.createElement(
+          'div',
+          { className: 'login' },
+          _react2.default.createElement(
+            'fieldset',
+            { className: 'login__fieldset' },
+            _react2.default.createElement(
+              _validationRc.Form,
+              { className: 'login__fieldset_form' },
+              _react2.default.createElement(
+                'div',
+                { className: 'login__fieldset_form_info' },
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  ' Authorization '
+                ),
+                _react2.default.createElement(
+                  'summary',
+                  { className: 'login__fieldset_form_info_summary' },
+                  'Enter your registration information to enter your personal account.'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'email', className: 'login__fieldset_form_inputs' },
+                  _react2.default.createElement(_validationRc.Input, {
+                    className: 'login__fieldset_form_inputs_email',
+                    placeholder: 'email@email.com',
+                    value: '',
+                    onChange: this.handleInputChange,
+                    name: 'email',
+                    validations: ['required', 'email']
+                  })
+                ),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'password', className: 'login__fieldset_form_inputs' },
+                  _react2.default.createElement(_validationRc.Input, {
+                    className: 'login__fieldset_form_inputs_password',
+                    type: 'password',
+                    placeholder: '******',
+                    value: '',
+                    onChange: this.handleInputChange,
+                    name: 'password',
+                    validations: ['required']
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  _validationRc.Button,
+                  { onClick: this.accountVerification, className: 'login__fieldset_form_button' },
+                  'Enter'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'login__fieldset_form_entry' },
+                _react2.default.createElement(
+                  'aside',
+                  null,
+                  ' Enter through: '
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'login__fieldset_form_entry_passport' },
+                  _react2.default.createElement(
+                    'summary',
+                    null,
+                    ' Facebook '
+                  ),
+                  _react2.default.createElement(
+                    'summary',
+                    null,
+                    ' Google+ '
+                  )
+                )
+              )
+            )
+          )
+        )
       );
     }
   }]);
@@ -14900,18 +14914,18 @@ var Login = function (_Component) {
   return Login;
 }(_react.Component);
 
-exports.default = Login;
-
-
 Login.propTypes = {
-  email: _react2.default.PropTypes.string,
-  password: _react2.default.PropTypes.string
+  // email: React.PropTypes.string,
+  // password: React.PropTypes.string,
+  history: _react2.default.PropTypes.object.isRequired
 };
 
 Login.defaultProps = {
-  email: '',
-  password: ''
+  // email: '',
+  // password: '',
 };
+
+exports.default = (0, _reactRouterDom.withRouter)(Login);
 
 /***/ }),
 /* 137 */
@@ -14930,7 +14944,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _user = __webpack_require__(29);
 
@@ -15097,7 +15111,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 __webpack_require__(293);
 
@@ -15210,7 +15224,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _validationRc = __webpack_require__(65);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _contacts = __webpack_require__(25);
 
@@ -15528,7 +15542,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(130);
 
-var _reactRouterDom = __webpack_require__(19);
+var _reactRouterDom = __webpack_require__(18);
 
 var _reactHistory = __webpack_require__(131);
 
@@ -15566,7 +15580,7 @@ var HomeLayout = function HomeLayout() {
 
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRouterDom.HashRouter,
-  { className: 'App' },
+  { className: 'App', history: _reactHistory.HashHistory },
   _react2.default.createElement(
     'div',
     null,
@@ -20294,7 +20308,7 @@ var EventPropagators = __webpack_require__(33);
 var ExecutionEnvironment = __webpack_require__(8);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactUpdates = __webpack_require__(16);
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 var getEventTarget = __webpack_require__(59);
 var isEventSupported = __webpack_require__(60);
@@ -27256,7 +27270,7 @@ var EventPropagators = __webpack_require__(33);
 var ExecutionEnvironment = __webpack_require__(8);
 var ReactDOMComponentTree = __webpack_require__(7);
 var ReactInputSelection = __webpack_require__(94);
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 var getActiveElement = __webpack_require__(80);
 var isTextInputElement = __webpack_require__(104);
@@ -27456,7 +27470,7 @@ var EventPropagators = __webpack_require__(33);
 var ReactDOMComponentTree = __webpack_require__(7);
 var SyntheticAnimationEvent = __webpack_require__(229);
 var SyntheticClipboardEvent = __webpack_require__(230);
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 var SyntheticFocusEvent = __webpack_require__(233);
 var SyntheticKeyboardEvent = __webpack_require__(235);
 var SyntheticMouseEvent = __webpack_require__(41);
@@ -27682,7 +27696,7 @@ module.exports = SimpleEventPlugin;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 /**
  * @interface Event
@@ -27726,7 +27740,7 @@ module.exports = SyntheticAnimationEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 /**
  * @interface Event
@@ -27769,7 +27783,7 @@ module.exports = SyntheticClipboardEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 /**
  * @interface Event
@@ -27892,7 +27906,7 @@ module.exports = SyntheticFocusEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 /**
  * @interface Event
@@ -28073,7 +28087,7 @@ module.exports = SyntheticTouchEvent;
 
 
 
-var SyntheticEvent = __webpack_require__(18);
+var SyntheticEvent = __webpack_require__(19);
 
 /**
  * @interface Event

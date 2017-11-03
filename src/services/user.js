@@ -22,8 +22,8 @@ export function saveUser(user) {
 }
 
 export function getUser() {
-  if (!myUser) {
-    myUser = JSON.parse(localStorage.getItem('userData') || '{}');
-  }
-  return myUser;
+  // if (!myUser) {
+  //   return myUser;
+  // }
+  myUser = JSON.parse(localStorage.getItem('userData') || '{}');
 }

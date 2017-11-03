@@ -21,6 +21,9 @@ export default class ContactList extends Component {
 
   handleItemClick(contact) {
     this.props.onItemClick(contact);
+    // .then(id => {
+    //   this.props.router.push('')
+    // });
   }
 
   render() {

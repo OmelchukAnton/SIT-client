@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HashRouter  as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { HashHistory } from 'react-history';
 import App from './components/App.jsx';
 import MainPage from './components/homepage/MainPage.jsx';
@@ -16,7 +16,7 @@ const HomeLayout = () => (
 );
 
 render(
-  <Router className="App">
+  <Router className="App" history={HashHistory}>
     <div>
       <Route exact path="/" component={MainPage} />
       <Route path="/pm" component={HomeLayout} />

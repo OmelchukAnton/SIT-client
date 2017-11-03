@@ -22,8 +22,8 @@ export class HomePage extends Component {
         </article>
         <section className="homepage__content">
           <div className="homepage__content_left">
-            <img src="./images/lists.jpg" alt="example-listOfContacts" className="picture__one" />
-            <img src="./images/chat.jpg" alt="example-chat" className="picture__two" />
+            <img src="./images/lists.jpeg" alt="example-listOfContacts" className="picture__one" />
+            <img src="./images/chat.jpeg" alt="example-chat" className="picture__two" />
           </div>
           <div className="homepage__content_center">
             <h1> Stay in touch! </h1>
