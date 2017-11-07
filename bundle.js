@@ -3173,7 +3173,11 @@ function addIdNewContact(contact) {
     mainId: (0, _user.getUserId)(),
     newContactId: contact._id
   };
-  return api.post('/addId', datas);
+
+  return api.post('/addId', datas).then(function (_ref) {
+    var data = _ref.data;
+    return data.length && data[0].chatId;
+  });
 }
 
 function addNewAvatar(imageInfo) {
@@ -3618,9 +3622,6 @@ function saveUser(user) {
 }
 
 function getUser() {
-  // if (!myUser) {
-  //   return myUser;
-  // }
   myUser = JSON.parse(localStorage.getItem('userData') || '{}');
 }
 
@@ -9048,13 +9049,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _contacts = __webpack_require__(25);
 
-var _ContactList = __webpack_require__(76);
+var _contactList = __webpack_require__(76);
 
-var _ContactList2 = _interopRequireDefault(_ContactList);
+var _contactList2 = _interopRequireDefault(_contactList);
 
-var _SearchNewContact = __webpack_require__(133);
+var _searchNewContact = __webpack_require__(133);
 
-var _SearchNewContact2 = _interopRequireDefault(_SearchNewContact);
+var _searchNewContact2 = _interopRequireDefault(_searchNewContact);
 
 __webpack_require__(112);
 
@@ -9066,20 +9067,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ListOfContacts = function (_Component) {
-  _inherits(ListOfContacts, _Component);
+var AddContacts = function (_Component) {
+  _inherits(AddContacts, _Component);
 
-  function ListOfContacts(props) {
-    _classCallCheck(this, ListOfContacts);
+  function AddContacts(props) {
+    _classCallCheck(this, AddContacts);
 
-    var _this = _possibleConstructorReturn(this, (ListOfContacts.__proto__ || Object.getPrototypeOf(ListOfContacts)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AddContacts.__proto__ || Object.getPrototypeOf(AddContacts)).call(this, props));
 
     _this.state = {};
     _this.handleSearch = _this.handleSearch.bind(_this);
     return _this;
   }
 
-  _createClass(ListOfContacts, [{
+  _createClass(AddContacts, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -9119,13 +9120,13 @@ var ListOfContacts = function (_Component) {
             _react2.default.createElement(
               'div',
               { className: 'addContats__search' },
-              _react2.default.createElement(_SearchNewContact2.default, {
+              _react2.default.createElement(_searchNewContact2.default, {
                 onSearchChange: this.handleSearch
               }),
               _react2.default.createElement(
                 'div',
                 { className: 'addContats__list' },
-                _react2.default.createElement(_ContactList2.default, {
+                _react2.default.createElement(_contactList2.default, {
                   contacts: this.state.filtered,
                   isAddContactAvailible: 'true'
                 })
@@ -9137,10 +9138,10 @@ var ListOfContacts = function (_Component) {
     }
   }]);
 
-  return ListOfContacts;
+  return AddContacts;
 }(_react.Component);
 
-exports.default = ListOfContacts;
+exports.default = AddContacts;
 
 /***/ }),
 /* 75 */
@@ -9196,9 +9197,9 @@ var _reactRouterDom = __webpack_require__(18);
 
 var _contacts = __webpack_require__(25);
 
-var _Contact = __webpack_require__(135);
+var _contacts2 = __webpack_require__(135);
 
-var _Contact2 = _interopRequireDefault(_Contact);
+var _contacts3 = _interopRequireDefault(_contacts2);
 
 __webpack_require__(74);
 
@@ -9212,10 +9213,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function onAddNewItem(contact) {
-  (0, _contacts.addIdNewContact)(contact);
-}
-
 var ContactList = function (_Component) {
   _inherits(ContactList, _Component);
 
@@ -9227,22 +9224,38 @@ var ContactList = function (_Component) {
     _this.state = {
       contacts: ''
     };
+
     _this.handleItemClick = _this.handleItemClick.bind(_this);
+    _this.handleAddingNewContact = _this.handleAddingNewContact.bind(_this);
     return _this;
   }
 
   _createClass(ContactList, [{
+    key: 'handleAddingNewContact',
+    value: function handleAddingNewContact(contact) {
+      var _this2 = this;
+
+      this.setState({
+        isLoading: true
+      });
+
+      (0, _contacts.addIdNewContact)(contact).then(function (chatId) {
+        _this2.setState({
+          isLoading: false
+        });
+
+        _this2.props.history.push('/pm/' + chatId);
+      });
+    }
+  }, {
     key: 'handleItemClick',
     value: function handleItemClick(contact) {
       this.props.onItemClick(contact);
-      // .then(id => {
-      //   this.props.router.push('')
-      // });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var renderContactLink = function renderContactLink(contact, i) {
         return _react2.default.createElement(
@@ -9251,19 +9264,19 @@ var ContactList = function (_Component) {
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/pm/' + contact.chatId },
-            _react2.default.createElement(_Contact2.default, {
+            _react2.default.createElement(_contacts3.default, {
               name: contact.firstname + ' ' + contact.lastname,
               id: contact._id,
-              onClick: _this2.handleItemClick
-            }),
-            _this2.props.isAddContactAvailible ? _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return onAddNewItem(contact);
-                } },
-              '+ add'
-            ) : null
-          )
+              onClick: _this3.handleItemClick
+            })
+          ),
+          _this3.props.isAddContactAvailible ? _react2.default.createElement(
+            'button',
+            { onClick: function onClick() {
+                return _this3.handleAddingNewContact(contact);
+              } },
+            '+ add'
+          ) : null
         );
       };
 
@@ -9271,10 +9284,9 @@ var ContactList = function (_Component) {
         return _react2.default.createElement(
           'div',
           null,
-          '\u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u043E\u0432..'
+          ' you do not have contacts. '
         );
       }
-
       return _react2.default.createElement(
         'div',
         { className: 'contactsList' },
@@ -9286,13 +9298,11 @@ var ContactList = function (_Component) {
   return ContactList;
 }(_react.Component);
 
-exports.default = ContactList;
-
-
 ContactList.propTypes = {
   contacts: _react2.default.PropTypes.array.isRequired,
   onItemClick: _react2.default.PropTypes.func,
-  isAddContactAvailible: _react2.default.PropTypes.string
+  isAddContactAvailible: _react2.default.PropTypes.string,
+  history: _react2.default.PropTypes.object.isRequired
 };
 
 ContactList.defaultProps = {
@@ -9300,6 +9310,8 @@ ContactList.defaultProps = {
   onItemClick: function onItemClick() {},
   isAddContactAvailible: ''
 };
+
+exports.default = (0, _reactRouterDom.withRouter)(ContactList);
 
 /***/ }),
 /* 77 */
@@ -13208,7 +13220,7 @@ module.exports = ReactPropTypesSecret;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(148);
+var content = __webpack_require__(147);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(15)(content, {});
@@ -13217,8 +13229,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./ListOfNewContacts.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./ListOfNewContacts.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./addContacts.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./addContacts.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -13243,8 +13255,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Chats.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Chats.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./chat.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./chat.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -13269,8 +13281,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./ContactStyle.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./ContactStyle.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contacts.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./contacts.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -13767,21 +13779,21 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ContactList = __webpack_require__(76);
+var _contactList = __webpack_require__(76);
 
-var _ContactList2 = _interopRequireDefault(_ContactList);
+var _contactList2 = _interopRequireDefault(_contactList);
 
-var _Navigation = __webpack_require__(138);
+var _navigation = __webpack_require__(138);
 
-var _Navigation2 = _interopRequireDefault(_Navigation);
+var _navigation2 = _interopRequireDefault(_navigation);
 
-var _Owner = __webpack_require__(137);
+var _owner = __webpack_require__(139);
 
-var _Owner2 = _interopRequireDefault(_Owner);
+var _owner2 = _interopRequireDefault(_owner);
 
-var _ChatWindow = __webpack_require__(134);
+var _chatWindow = __webpack_require__(134);
 
-var _ChatWindow2 = _interopRequireDefault(_ChatWindow);
+var _chatWindow2 = _interopRequireDefault(_chatWindow);
 
 var _user = __webpack_require__(29);
 
@@ -13806,6 +13818,7 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {};
+
     _this.handleSearch = _this.handleSearch.bind(_this);
     _this.onItemClick = _this.onItemClick.bind(_this);
     _this.handleBackClick = _this.handleBackClick.bind(_this);
@@ -13867,14 +13880,14 @@ var App = function (_Component) {
           _react2.default.createElement(
             'section',
             null,
-            _react2.default.createElement(_Navigation2.default, {
+            _react2.default.createElement(_navigation2.default, {
               onSearchChange: this.handleSearch
             }),
-            _react2.default.createElement(_Owner2.default, null),
+            _react2.default.createElement(_owner2.default, null),
             _react2.default.createElement(
               'div',
               { className: 'tada' },
-              _react2.default.createElement(_ContactList2.default, {
+              _react2.default.createElement(_contactList2.default, {
                 contacts: this.state.filtered,
                 onItemClick: this.onItemClick
               })
@@ -13883,7 +13896,7 @@ var App = function (_Component) {
           _react2.default.createElement(
             'section',
             null,
-            _react2.default.createElement(_ChatWindow2.default, {
+            _react2.default.createElement(_chatWindow2.default, {
               contact: this.state.contactItem,
               onClick: this.handleBackClick
             }),
@@ -13937,25 +13950,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ChatContainer = function (_Component) {
-  _inherits(ChatContainer, _Component);
+var Chat = function (_Component) {
+  _inherits(Chat, _Component);
 
-  function ChatContainer(props) {
-    _classCallCheck(this, ChatContainer);
+  function Chat(props) {
+    _classCallCheck(this, Chat);
 
-    var _this = _possibleConstructorReturn(this, (ChatContainer.__proto__ || Object.getPrototypeOf(ChatContainer)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
     _this.state = {
       message: '',
       messages: []
     };
+
     _this.writeMessage = _this.writeMessage.bind(_this);
     _this.sendNewMessage = _this.sendNewMessage.bind(_this);
     _this.scrollToBottom = _this.scrollToBottom.bind(_this);
     return _this;
   }
 
-  _createClass(ChatContainer, [{
+  _createClass(Chat, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -13973,7 +13987,6 @@ var ChatContainer = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var currentId = this.props.match.params.chatId;
       var nextId = nextProps.match.params.chatId;
-
       if (currentId !== nextId) {
         this.getMessages(nextId);
       }
@@ -13993,7 +14006,7 @@ var ChatContainer = function (_Component) {
     value: function getMessages(chatId) {
       var _this3 = this;
 
-      (0, _messages.getMessages)(chatId).then(function (data) {
+      return (0, _messages.getMessages)(chatId).then(function (data) {
         _this3.setState({
           messages: data
         });
@@ -14006,7 +14019,6 @@ var ChatContainer = function (_Component) {
 
       var chatId = this.props.match.params.chatId;
 
-
       if (this.state.messages.length === 0) {
         (0, _messages.getNewMessages)(chatId, 0).then(function (data) {
           _this4.setState({
@@ -14017,6 +14029,10 @@ var ChatContainer = function (_Component) {
         var lastMessage = this.state.messages[this.state.messages.length - 1];
         var lastMessageTime = lastMessage.sendTime;
         (0, _messages.getNewMessages)(chatId, lastMessageTime).then(function (data) {
+          if (!data.length) {
+            return;
+          }
+          // console.log(data[0].sendTime)
           _this4.setState({
             messages: [].concat(_toConsumableArray(_this4.state.messages), _toConsumableArray(data))
           });
@@ -14047,11 +14063,9 @@ var ChatContainer = function (_Component) {
     key: 'sendNewMessage',
     value: function sendNewMessage() {
       var chatId = this.props.match.params.chatId;
-
       if (this.state.message.length === 0) {
         return;
       }
-
       (0, _messages.sendMessage)(this.state, chatId);
       this.setState({
         message: ''
@@ -14063,7 +14077,6 @@ var ChatContainer = function (_Component) {
       if (this.state.messages.length === 0) {
         return null;
       }
-
       return this.state.messages.map(function (message) {
         return _react2.default.createElement(
           'div',
@@ -14155,17 +14168,17 @@ var ChatContainer = function (_Component) {
     }
   }]);
 
-  return ChatContainer;
+  return Chat;
 }(_react.Component);
 
-exports.default = ChatContainer;
+exports.default = Chat;
 
 
-ChatContainer.propTypes = {
+Chat.propTypes = {
   match: _react2.default.PropTypes.object.isRequired
 };
 
-ChatContainer.defaultProps = {
+Chat.defaultProps = {
   onClick: function onClick() {}
 };
 
@@ -14179,7 +14192,6 @@ ChatContainer.defaultProps = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HomePage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -14189,11 +14201,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(18);
 
-var _Login = __webpack_require__(136);
+var _login = __webpack_require__(137);
 
-var _Login2 = _interopRequireDefault(_Login);
+var _login2 = _interopRequireDefault(_login);
 
-__webpack_require__(290);
+__webpack_require__(291);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14203,23 +14215,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var HomePage = exports.HomePage = function (_Component) {
-  _inherits(HomePage, _Component);
+var Homepage = function (_Component) {
+  _inherits(Homepage, _Component);
 
-  function HomePage() {
-    _classCallCheck(this, HomePage);
+  function Homepage() {
+    _classCallCheck(this, Homepage);
 
-    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Homepage.__proto__ || Object.getPrototypeOf(Homepage)).apply(this, arguments));
   }
 
-  _createClass(HomePage, [{
+  _createClass(Homepage, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
       if (Object.keys(userAuth).length !== 0) {
         this.props.history.push('/pm');
       }
-      // alert('Incorrect email or password');
     }
   }, {
     key: 'render',
@@ -14280,21 +14291,21 @@ var HomePage = exports.HomePage = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(_Login2.default, null)
+            _react2.default.createElement(_login2.default, null)
           )
         )
       );
     }
   }]);
 
-  return HomePage;
+  return Homepage;
 }(_react.Component);
 
-HomePage.propTypes = {
+Homepage.propTypes = {
   history: _react2.default.PropTypes.object.isRequired
 };
 
-exports.default = (0, _reactRouterDom.withRouter)(HomePage);
+exports.default = (0, _reactRouterDom.withRouter)(Homepage);
 
 /***/ }),
 /* 129 */
@@ -14313,9 +14324,9 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CreateAccount = __webpack_require__(139);
+var _createAccount = __webpack_require__(136);
 
-var _CreateAccount2 = _interopRequireDefault(_CreateAccount);
+var _createAccount2 = _interopRequireDefault(_createAccount);
 
 __webpack_require__(140);
 
@@ -14329,19 +14340,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RegistrationPage = function (_Component) {
-  _inherits(RegistrationPage, _Component);
+var Registration = function (_Component) {
+  _inherits(Registration, _Component);
 
-  function RegistrationPage(props) {
-    _classCallCheck(this, RegistrationPage);
+  function Registration(props) {
+    _classCallCheck(this, Registration);
 
-    var _this = _possibleConstructorReturn(this, (RegistrationPage.__proto__ || Object.getPrototypeOf(RegistrationPage)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Registration.__proto__ || Object.getPrototypeOf(Registration)).call(this, props));
 
     _this.state = {};
     return _this;
   }
 
-  _createClass(RegistrationPage, [{
+  _createClass(Registration, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -14366,16 +14377,16 @@ var RegistrationPage = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'form_login_and_create' },
-          _react2.default.createElement(_CreateAccount2.default, null)
+          _react2.default.createElement(_createAccount2.default, null)
         )
       );
     }
   }]);
 
-  return RegistrationPage;
+  return Registration;
 }(_react.Component);
 
-exports.default = RegistrationPage;
+exports.default = Registration;
 
 /***/ }),
 /* 130 */
@@ -14614,7 +14625,6 @@ var ChatWindow = function (_Component) {
           ' News '
         );
       }
-
       return _react2.default.createElement(
         'div',
         { className: 'chatNav' },
@@ -14767,485 +14777,13 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(18);
-
-var _validationRc = __webpack_require__(65);
-
-var _contacts = __webpack_require__(25);
-
-__webpack_require__(291);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Login = function (_Component) {
-  _inherits(Login, _Component);
-
-  function Login(props) {
-    _classCallCheck(this, Login);
-
-    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
-
-    _this.state = {
-      email: '',
-      password: ''
-    };
-    _this.handleInputChange = _this.handleInputChange.bind(_this);
-    _this.accountVerification = _this.accountVerification.bind(_this);
-    return _this;
-  }
-
-  // componentWillMount() {
-  //   const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
-  //   if (Object.keys(userAuth).length !== 0) {
-  //     this.props.history.push('/pm');
-  //   }
-  //   // alert('Incorrect email or password');
-  // }
-
-  _createClass(Login, [{
-    key: 'handleInputChange',
-    value: function handleInputChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: 'accountVerification',
-    value: function accountVerification() {
-      var _this2 = this;
-
-      (0, _contacts.checkAccount)(this.state).then(function () {
-        _this2.props.history.push('/pm');
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          { className: 'login' },
-          _react2.default.createElement(
-            'fieldset',
-            { className: 'login__fieldset' },
-            _react2.default.createElement(
-              _validationRc.Form,
-              { className: 'login__fieldset_form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'login__fieldset_form_info' },
-                _react2.default.createElement(
-                  'h2',
-                  null,
-                  ' Authorization '
-                ),
-                _react2.default.createElement(
-                  'summary',
-                  { className: 'login__fieldset_form_info_summary' },
-                  'Enter your registration information to enter your personal account.'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'email', className: 'login__fieldset_form_inputs' },
-                  _react2.default.createElement(_validationRc.Input, {
-                    className: 'login__fieldset_form_inputs_email',
-                    placeholder: 'email@email.com',
-                    value: '',
-                    onChange: this.handleInputChange,
-                    name: 'email',
-                    validations: ['required', 'email']
-                  })
-                ),
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'password', className: 'login__fieldset_form_inputs' },
-                  _react2.default.createElement(_validationRc.Input, {
-                    className: 'login__fieldset_form_inputs_password',
-                    type: 'password',
-                    placeholder: '******',
-                    value: '',
-                    onChange: this.handleInputChange,
-                    name: 'password',
-                    validations: ['required'],
-                    onKeyPress: function onKeyPress(event) {
-                      if (event.key === 'Enter') {
-                        _this3.accountVerification();
-                      }
-                    }
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                  _validationRc.Button,
-                  { onClick: this.accountVerification, className: 'login__fieldset_form_button' },
-                  'Enter'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'login__fieldset_form_entry' },
-                _react2.default.createElement(
-                  'aside',
-                  null,
-                  ' Enter through: '
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'login__fieldset_form_entry_passport' },
-                  _react2.default.createElement(
-                    'summary',
-                    null,
-                    ' Facebook '
-                  ),
-                  _react2.default.createElement(
-                    'summary',
-                    null,
-                    ' Google+ '
-                  )
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Login;
-}(_react.Component);
-
-Login.propTypes = {
-  // email: React.PropTypes.string,
-  // password: React.PropTypes.string,
-  history: _react2.default.PropTypes.object.isRequired
-};
-
-Login.defaultProps = {
-  // email: '',
-  // password: '',
-};
-
-exports.default = (0, _reactRouterDom.withRouter)(Login);
-
-/***/ }),
-/* 137 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(18);
-
-var _user = __webpack_require__(29);
-
-var _contacts = __webpack_require__(25);
-
-__webpack_require__(292);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Owner = function (_Component) {
-  _inherits(Owner, _Component);
-
-  function Owner(props) {
-    _classCallCheck(this, Owner);
-
-    var _this = _possibleConstructorReturn(this, (Owner.__proto__ || Object.getPrototypeOf(Owner)).call(this, props));
-
-    _this.state = {
-      file: ''
-    };
-    return _this;
-  }
-
-  _createClass(Owner, [{
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var imageInfo = this.state.file;
-      (0, _contacts.addNewAvatar)(imageInfo);
-    }
-  }, {
-    key: 'handleImageChange',
-    value: function handleImageChange(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-
-      var reader = new FileReader();
-      var file = e.target.files[0];
-
-      reader.onloadend = function () {
-        _this2.setState({
-          file: file
-        });
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      var urlAva = 'http://localhost:5000/' + (0, _user.getUserId)() + '.jpeg';
-      return _react2.default.createElement(
-        'div',
-        { className: 'mainUser' },
-        _react2.default.createElement(
-          'div',
-          { className: 'mainUser__info' },
-          _react2.default.createElement(
-            'div',
-            { className: 'mainUser__info_profile' },
-            _react2.default.createElement(
-              'div',
-              { className: 'mainUser__info_profile_img' },
-              _react2.default.createElement('img', { src: urlAva, alt: 'avatar' })
-            )
-          ),
-          _react2.default.createElement(
-            'section',
-            { className: 'mainUser__info_data' },
-            _react2.default.createElement(
-              'div',
-              null,
-              (0, _user.getFirstName)(),
-              ' ',
-              (0, _user.getLastName)()
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'mainUser__info_data_status' },
-              _react2.default.createElement('input', { placeholder: 'change status' })
-            ),
-            _react2.default.createElement(
-              'div',
-              null,
-              'email: ',
-              (0, _user.getEmail)()
-            ),
-            _react2.default.createElement(
-              'form',
-              { className: 'mainUser__info_data_image', onSubmit: function onSubmit(e) {
-                  return _this3.handleSubmit(e);
-                } },
-              _react2.default.createElement('input', {
-                className: 'fileInput',
-                type: 'file',
-                onChange: function onChange(e) {
-                  return _this3.handleImageChange(e);
-                }
-              }),
-              _react2.default.createElement(
-                'button',
-                { className: 'submitButton', type: 'submit', onClick: function onClick(e) {
-                    return _this3.handleSubmit(e);
-                  } },
-                'Upload'
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'mainUser__contacts' },
-          _react2.default.createElement(
-            'div',
-            { className: 'mainUser__contacts_list' },
-            'My contacts:'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'mainUser__contacts_add' },
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/find' },
-              _react2.default.createElement(
-                'button',
-                { className: 'mainUser__contacts_add_button' },
-                '+ new contact'
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Owner;
-}(_react.Component);
-
-exports.default = Owner;
-
-/***/ }),
-/* 138 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(18);
-
-__webpack_require__(293);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function onExitClick() {
-  JSON.parse(localStorage.removeItem('userData') || '{}');
-}
-
-var Navigation = function (_Component) {
-  _inherits(Navigation, _Component);
-
-  function Navigation(props) {
-    _classCallCheck(this, Navigation);
-
-    var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this, props));
-
-    _this.state = {
-      search: ''
-    };
-    _this.updateSearch = _this.updateSearch.bind(_this);
-    return _this;
-  }
-
-  _createClass(Navigation, [{
-    key: 'updateSearch',
-    value: function updateSearch(_ref) {
-      var target = _ref.target;
-
-      this.setState({
-        search: target.value
-      });
-      this.props.onSearchChange(target.value);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'section',
-        { className: 'navMainUser' },
-        _react2.default.createElement(
-          'div',
-          { className: 'navMainUser__block' },
-          _react2.default.createElement(
-            'div',
-            { className: 'navMainUser__block_general' },
-            _react2.default.createElement(
-              'div',
-              { className: 'navMainUser__block_general_nameApp' },
-              'Stay in touch!'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'navMainUser__block_general_action' },
-              _react2.default.createElement('input', {
-                className: 'navMainUser__block_general_action_search',
-                type: 'text',
-                placeholder: 'Search for users',
-                value: this.state.search,
-                onChange: this.updateSearch
-              }),
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/' },
-                _react2.default.createElement(
-                  'button',
-                  { className: 'navMainUser__block_general_action_exit', onClick: onExitClick },
-                  'exit'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Navigation;
-}(_react.Component);
-
-exports.default = Navigation;
-
-
-Navigation.propTypes = {
-  onSearchChange: _react2.default.PropTypes.func.isRequired
-};
-
-/***/ }),
-/* 139 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
 var _validationRc = __webpack_require__(65);
 
 var _reactRouterDom = __webpack_require__(18);
 
 var _contacts = __webpack_require__(25);
 
-__webpack_require__(294);
+__webpack_require__(290);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15272,6 +14810,7 @@ var CreateAccount = function (_Component) {
       password: '',
       passwordConfirm: ''
     };
+
     _this.handleInputChange = _this.handleInputChange.bind(_this);
     _this.onAddNewAccount = _this.onAddNewAccount.bind(_this);
     return _this;
@@ -15446,6 +14985,456 @@ CreateAccount.defaultProps = {
 };
 
 /***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _validationRc = __webpack_require__(65);
+
+var _contacts = __webpack_require__(25);
+
+__webpack_require__(292);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Login = function (_Component) {
+  _inherits(Login, _Component);
+
+  function Login(props) {
+    _classCallCheck(this, Login);
+
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+    _this.state = {
+      email: '',
+      password: ''
+    };
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    _this.accountVerification = _this.accountVerification.bind(_this);
+    return _this;
+  }
+
+  _createClass(Login, [{
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'accountVerification',
+    value: function accountVerification(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      (0, _contacts.checkAccount)(this.state).then(function () {
+        _this2.props.history.push('/pm');
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'login' },
+          _react2.default.createElement(
+            'fieldset',
+            { className: 'login__fieldset' },
+            _react2.default.createElement(
+              _validationRc.Form,
+              { onSubmit: this.accountVerification, className: 'login__fieldset_form' },
+              _react2.default.createElement(
+                'div',
+                { className: 'login__fieldset_form_info' },
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  ' Authorization '
+                ),
+                _react2.default.createElement(
+                  'summary',
+                  { className: 'login__fieldset_form_info_summary' },
+                  'Enter your registration information to enter your personal account.'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'email', className: 'login__fieldset_form_inputs' },
+                  _react2.default.createElement(_validationRc.Input, {
+                    className: 'login__fieldset_form_inputs_email',
+                    placeholder: 'email@email.com',
+                    value: '',
+                    onChange: this.handleInputChange,
+                    name: 'email',
+                    validations: ['required', 'email']
+                  })
+                ),
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'password', className: 'login__fieldset_form_inputs' },
+                  _react2.default.createElement(_validationRc.Input, {
+                    className: 'login__fieldset_form_inputs_password',
+                    type: 'password',
+                    placeholder: '******',
+                    value: '',
+                    onChange: this.handleInputChange,
+                    name: 'password',
+                    validations: ['required']
+                  })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  _validationRc.Button,
+                  { className: 'login__fieldset_form_button' },
+                  'Enter'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'login__fieldset_form_entry' },
+                _react2.default.createElement(
+                  'aside',
+                  null,
+                  ' Enter through: '
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'login__fieldset_form_entry_passport' },
+                  _react2.default.createElement(
+                    'summary',
+                    null,
+                    ' Facebook '
+                  ),
+                  _react2.default.createElement(
+                    'summary',
+                    null,
+                    ' Google+ '
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Login;
+}(_react.Component);
+
+Login.propTypes = {
+  history: _react2.default.PropTypes.object.isRequired
+};
+
+Login.defaultProps = {};
+
+exports.default = (0, _reactRouterDom.withRouter)(Login);
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+__webpack_require__(293);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function onExitClick() {
+  JSON.parse(localStorage.removeItem('userData') || '{}');
+}
+
+var Navigation = function (_Component) {
+  _inherits(Navigation, _Component);
+
+  function Navigation(props) {
+    _classCallCheck(this, Navigation);
+
+    var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this, props));
+
+    _this.state = {
+      search: ''
+    };
+    _this.updateSearch = _this.updateSearch.bind(_this);
+    return _this;
+  }
+
+  _createClass(Navigation, [{
+    key: 'updateSearch',
+    value: function updateSearch(_ref) {
+      var target = _ref.target;
+
+      this.setState({
+        search: target.value
+      });
+      this.props.onSearchChange(target.value);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'navMainUser' },
+        _react2.default.createElement(
+          'div',
+          { className: 'navMainUser__block' },
+          _react2.default.createElement(
+            'div',
+            { className: 'navMainUser__block_general' },
+            _react2.default.createElement(
+              'div',
+              { className: 'navMainUser__block_general_nameApp' },
+              'Stay in touch!'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'navMainUser__block_general_action' },
+              _react2.default.createElement('input', {
+                className: 'navMainUser__block_general_action_search',
+                type: 'text',
+                placeholder: 'Search for users',
+                value: this.state.search,
+                onChange: this.updateSearch
+              }),
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' },
+                _react2.default.createElement(
+                  'button',
+                  { className: 'navMainUser__block_general_action_exit', onClick: onExitClick },
+                  'exit'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navigation;
+}(_react.Component);
+
+exports.default = Navigation;
+
+
+Navigation.propTypes = {
+  onSearchChange: _react2.default.PropTypes.func.isRequired
+};
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _user = __webpack_require__(29);
+
+var _contacts = __webpack_require__(25);
+
+__webpack_require__(294);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Owner = function (_Component) {
+  _inherits(Owner, _Component);
+
+  function Owner(props) {
+    _classCallCheck(this, Owner);
+
+    var _this = _possibleConstructorReturn(this, (Owner.__proto__ || Object.getPrototypeOf(Owner)).call(this, props));
+
+    _this.state = {
+      file: ''
+    };
+    return _this;
+  }
+
+  _createClass(Owner, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var imageInfo = this.state.file;
+      (0, _contacts.addNewAvatar)(imageInfo);
+    }
+  }, {
+    key: 'handleImageChange',
+    value: function handleImageChange(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.target.files[0];
+      reader.onloadend = function () {
+        _this2.setState({
+          file: file
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var urlAva = 'http://localhost:5000/' + (0, _user.getUserId)() + '.jpeg';
+      return _react2.default.createElement(
+        'div',
+        { className: 'mainUser' },
+        _react2.default.createElement(
+          'div',
+          { className: 'mainUser__info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mainUser__info_profile' },
+            _react2.default.createElement(
+              'div',
+              { className: 'mainUser__info_profile_img' },
+              _react2.default.createElement('img', { src: urlAva, alt: 'avatar' })
+            )
+          ),
+          _react2.default.createElement(
+            'section',
+            { className: 'mainUser__info_data' },
+            _react2.default.createElement(
+              'div',
+              null,
+              (0, _user.getFirstName)(),
+              ' ',
+              (0, _user.getLastName)()
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'mainUser__info_data_status' },
+              _react2.default.createElement('input', { placeholder: 'change status' })
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              'email: ',
+              (0, _user.getEmail)()
+            ),
+            _react2.default.createElement(
+              'form',
+              { className: 'mainUser__info_data_image', onSubmit: function onSubmit(e) {
+                  return _this3.handleSubmit(e);
+                } },
+              _react2.default.createElement('input', {
+                className: 'fileInput',
+                type: 'file',
+                onChange: function onChange(e) {
+                  return _this3.handleImageChange(e);
+                }
+              }),
+              _react2.default.createElement(
+                'button',
+                { className: 'submitButton', type: 'submit', onClick: function onClick(e) {
+                    return _this3.handleSubmit(e);
+                  } },
+                'Upload'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'mainUser__contacts' },
+          _react2.default.createElement(
+            'div',
+            { className: 'mainUser__contacts_list' },
+            'My contacts:'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'mainUser__contacts_add' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/find' },
+              _react2.default.createElement(
+                'button',
+                { className: 'mainUser__contacts_add_button' },
+                '+ new contact'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Owner;
+}(_react.Component);
+
+exports.default = Owner;
+
+/***/ }),
 /* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15563,25 +15552,25 @@ var _reactRouterDom = __webpack_require__(18);
 
 var _reactHistory = __webpack_require__(131);
 
-var _App = __webpack_require__(126);
+var _app = __webpack_require__(126);
 
-var _App2 = _interopRequireDefault(_App);
+var _app2 = _interopRequireDefault(_app);
 
-var _MainPage = __webpack_require__(128);
+var _homepage = __webpack_require__(128);
 
-var _MainPage2 = _interopRequireDefault(_MainPage);
+var _homepage2 = _interopRequireDefault(_homepage);
 
-var _RegistrationPage = __webpack_require__(129);
+var _registration = __webpack_require__(129);
 
-var _RegistrationPage2 = _interopRequireDefault(_RegistrationPage);
+var _registration2 = _interopRequireDefault(_registration);
 
-var _ChatContainer = __webpack_require__(127);
+var _chat = __webpack_require__(127);
 
-var _ChatContainer2 = _interopRequireDefault(_ChatContainer);
+var _chat2 = _interopRequireDefault(_chat);
 
-var _ListOfContacts = __webpack_require__(74);
+var _addContacts = __webpack_require__(74);
 
-var _ListOfContacts2 = _interopRequireDefault(_ListOfContacts);
+var _addContacts2 = _interopRequireDefault(_addContacts);
 
 __webpack_require__(132);
 
@@ -15589,9 +15578,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var HomeLayout = function HomeLayout() {
   return _react2.default.createElement(
-    _App2.default,
+    _app2.default,
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/pm/:chatId', component: _ChatContainer2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/pm/:chatId', component: _chat2.default })
   );
 };
 
@@ -15601,10 +15590,10 @@ var HomeLayout = function HomeLayout() {
   _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _MainPage2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _homepage2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/pm', component: HomeLayout }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/reg', component: _RegistrationPage2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/find', component: _ListOfContacts2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/reg', component: _registration2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/find', component: _addContacts2.default })
   )
 ), document.getElementById('root'));
 
@@ -17739,7 +17728,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".contentSection {\n  display: flex; }\n  .contentSection > section {\n    width: 50%; }\n", ""]);
+exports.push([module.i, ".addContats {\n  background-color: #EDEEF0; }\n  .addContats__list {\n    display: flex;\n    margin: 0% 15%; }\n\n.searchContacts {\n  height: 180px;\n  border: 10px solid grey; }\n  .searchContacts__appName {\n    padding: 10px 0px 0px  10px;\n    font-size: 20px;\n    font-weight: bold;\n    font-family: monospace;\n    border-bottom: 2px solid;\n    color: #FFFFFF;\n    background-color: #5e8ed6; }\n    .searchContacts__appName p {\n      font-size: 30px;\n      text-align: center; }\n  .searchContacts__returnBack {\n    height: 50px;\n    width: 14.5%;\n    background-color: #99e8a6;\n    justify-content: center; }\n  .searchContacts__inputSearch {\n    height: 50px;\n    width: 85.5%;\n    padding-left: 10px;\n    background-color: #E8E8E8; }\n    .searchContacts__inputSearch:focus {\n      background-color: #FFFFFF; }\n", ""]);
 
 // exports
 
@@ -17753,7 +17742,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".addContats {\n  background-color: #EDEEF0; }\n  .addContats__list {\n    display: flex;\n    margin: 0% 15%; }\n\n.searchContacts {\n  height: 180px;\n  border: 10px solid grey; }\n  .searchContacts__appName {\n    padding: 10px 0px 0px  10px;\n    font-size: 20px;\n    font-weight: bold;\n    font-family: monospace;\n    border-bottom: 2px solid;\n    color: #FFFFFF;\n    background-color: #5e8ed6; }\n    .searchContacts__appName p {\n      font-size: 30px;\n      text-align: center; }\n  .searchContacts__returnBack {\n    height: 50px;\n    width: 14.5%;\n    background-color: #99e8a6;\n    justify-content: center; }\n  .searchContacts__inputSearch {\n    height: 50px;\n    width: 85.5%;\n    padding-left: 10px;\n    background-color: #E8E8E8; }\n    .searchContacts__inputSearch:focus {\n      background-color: #FFFFFF; }\n", ""]);
+exports.push([module.i, ".contentSection {\n  display: flex; }\n  .contentSection > section {\n    width: 50%; }\n", ""]);
 
 // exports
 
@@ -17795,7 +17784,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".homepage {\n  background-color: #01B8A4;\n  color: white; }\n  .homepage__head_greating {\n    text-align: center;\n    font-size: 40px; }\n  .homepage__head_greatingInfo {\n    padding-left: 60%;\n    font-size: 25px;\n    margin: 20px 0; }\n  .homepage__content {\n    display: flex;\n    background-color: #305075; }\n    .homepage__content_left {\n      height: 80%; }\n      .homepage__content_left .picture__one {\n        margin-top: 30px;\n        border-radius: 100px;\n        transform: rotate(-20deg); }\n      .homepage__content_left .picture__two {\n        height: 200px;\n        margin: 20px 15px 10px 40px;\n        border-radius: 100px;\n        border: 3px solid silver;\n        transform: rotate(15deg); }\n    .homepage__content_center {\n      padding-top: 10px;\n      height: 80%; }\n      .homepage__content_center h1 {\n        text-align: center; }\n    .homepage__content_regForm {\n      height: 80%; }\n      .homepage__content_regForm_btn {\n        box-shadow: 0 0 0 3px white, 0 0 13px #333;\n        background-color: #60e035;\n        margin: 10px;\n        margin-left: 100px;\n        padding: 10px; }\n", ""]);
+exports.push([module.i, ".formCreateAcc {\n  display: flex;\n  justify-content: center;\n  background-color: #C7CFE0; }\n  .formCreateAcc h3 {\n    text-align: center;\n    font-weight: bold;\n    color: #70AF5C; }\n  .formCreateAcc__required {\n    display: flex;\n    justify-content: flex-end;\n    text-decoration: underline; }\n  .formCreateAcc__group_blocks {\n    border: 2px solid #00897B;\n    margin-bottom: 1px;\n    padding-bottom: 10px; }\n    .formCreateAcc__group_blocks_inputs {\n      border-radius: 4px;\n      border-width: 1px;\n      padding-left: 10px;\n      margin: 10px 0 10px 0px;\n      width: 300px;\n      height: 30px; }\n      .formCreateAcc__group_blocks_inputs:active {\n        border-color: blue; }\n  .formCreateAcc__buttonCreateAcc button {\n    width: 100%;\n    border: none;\n    height: 30px;\n    color: white;\n    background-color: #00897B;\n    border-radius: 3%; }\n\n.form-error {\n  color: red; }\n", ""]);
 
 // exports
 
@@ -17809,7 +17798,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".login__fieldset {\n  width: 210px;\n  margin: 50px;\n  background-color: #F3F3F3;\n  border: none;\n  border-radius: 5px; }\n  .login__fieldset_form {\n    color: #4A4446; }\n    .login__fieldset_form_info {\n      padding: 0 10px; }\n      .login__fieldset_form_info_summary {\n        font-size: 13px;\n        color: #808682; }\n    .login__fieldset_form_inputs {\n      display: flex;\n      padding: 20px 10px 0 10px; }\n      .login__fieldset_form_inputs_email, .login__fieldset_form_inputs_password {\n        padding: 10px;\n        border-radius: 5px; }\n        .login__fieldset_form_inputs_email:focus, .login__fieldset_form_inputs_password:focus {\n          background-color: #DFE9EB; }\n    .login__fieldset_form_button {\n      width: 90%;\n      margin: 10px 10px 0 10px;\n      padding: 10px; }\n    .login__fieldset_form_entry {\n      display: flex;\n      font-size: 13px;\n      margin-left: 10px;\n      margin-top: 20px; }\n      .login__fieldset_form_entry_passport {\n        margin-left: 50px; }\n", ""]);
+exports.push([module.i, ".homepage {\n  background-color: #01B8A4;\n  color: white; }\n  .homepage__head_greating {\n    text-align: center;\n    font-size: 40px; }\n  .homepage__head_greatingInfo {\n    padding-left: 60%;\n    font-size: 25px;\n    margin: 20px 0; }\n  .homepage__content {\n    display: flex;\n    background-color: #305075; }\n    .homepage__content_left {\n      height: 80%; }\n      .homepage__content_left .picture__one {\n        margin-top: 30px;\n        border-radius: 100px;\n        transform: rotate(-20deg); }\n      .homepage__content_left .picture__two {\n        height: 200px;\n        margin: 20px 15px 10px 40px;\n        border-radius: 100px;\n        border: 3px solid silver;\n        transform: rotate(15deg); }\n    .homepage__content_center {\n      padding-top: 10px;\n      height: 80%; }\n      .homepage__content_center h1 {\n        text-align: center; }\n    .homepage__content_regForm {\n      height: 80%; }\n      .homepage__content_regForm_btn {\n        box-shadow: 0 0 0 3px white, 0 0 13px #333;\n        background-color: #60e035;\n        margin: 10px;\n        margin-left: 100px;\n        padding: 10px; }\n", ""]);
 
 // exports
 
@@ -17823,7 +17812,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".mainUser__info {\n  display: flex;\n  background-color: #EDEEF0; }\n  .mainUser__info_profile {\n    margin: 5px 0px 5px 20px; }\n    .mainUser__info_profile_img {\n      margin-right: 10px;\n      text-align: center;\n      height: 80px;\n      width: 80px;\n      border-left: 1px solid gray;\n      border-right: 1px solid gray;\n      border-top: 5px solid gray;\n      border-bottom: 5px solid gray; }\n      .mainUser__info_profile_img img {\n        width: 100%;\n        height: 100%; }\n  .mainUser__info_data {\n    padding-top: 10px; }\n    .mainUser__info_data_status input {\n      border: none;\n      background-color: #EDEEF0; }\n\n.mainUser__contacts {\n  display: flex;\n  justify-content: space-between;\n  background-color: #2C8FE5;\n  padding: 5px; }\n  .mainUser__contacts_list {\n    padding: 2px; }\n  .mainUser__contacts_add_button {\n    border: none;\n    padding: 2px; }\n", ""]);
+exports.push([module.i, ".login__fieldset {\n  width: 210px;\n  margin: 50px;\n  background-color: #F3F3F3;\n  border: none;\n  border-radius: 5px; }\n  .login__fieldset_form {\n    color: #4A4446; }\n    .login__fieldset_form_info {\n      padding: 0 10px; }\n      .login__fieldset_form_info_summary {\n        font-size: 13px;\n        color: #808682; }\n    .login__fieldset_form_inputs {\n      display: flex;\n      padding: 20px 10px 0 10px; }\n      .login__fieldset_form_inputs_email, .login__fieldset_form_inputs_password {\n        padding: 10px;\n        border-radius: 5px; }\n        .login__fieldset_form_inputs_email:focus, .login__fieldset_form_inputs_password:focus {\n          background-color: #DFE9EB; }\n    .login__fieldset_form_button {\n      width: 90%;\n      margin: 10px 10px 0 10px;\n      padding: 10px; }\n    .login__fieldset_form_entry {\n      display: flex;\n      font-size: 13px;\n      margin-left: 10px;\n      margin-top: 20px; }\n      .login__fieldset_form_entry_passport {\n        margin-left: 50px; }\n", ""]);
 
 // exports
 
@@ -17851,7 +17840,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".formCreateAcc {\n  display: flex;\n  justify-content: center;\n  background-color: #C7CFE0; }\n  .formCreateAcc h3 {\n    text-align: center;\n    font-weight: bold;\n    color: #70AF5C; }\n  .formCreateAcc__required {\n    display: flex;\n    justify-content: flex-end;\n    text-decoration: underline; }\n  .formCreateAcc__group_blocks {\n    border: 2px solid #00897B;\n    margin-bottom: 1px;\n    padding-bottom: 10px; }\n    .formCreateAcc__group_blocks_inputs {\n      border-radius: 4px;\n      border-width: 1px;\n      padding-left: 10px;\n      margin: 10px 0 10px 0px;\n      width: 300px;\n      height: 30px; }\n      .formCreateAcc__group_blocks_inputs:active {\n        border-color: blue; }\n  .formCreateAcc__buttonCreateAcc button {\n    width: 100%;\n    border: none;\n    height: 30px;\n    color: white;\n    background-color: #00897B;\n    border-radius: 3%; }\n\n.form-error {\n  color: red; }\n", ""]);
+exports.push([module.i, ".mainUser__info {\n  display: flex;\n  background-color: #EDEEF0; }\n  .mainUser__info_profile {\n    margin: 5px 0px 5px 20px; }\n    .mainUser__info_profile_img {\n      margin-right: 10px;\n      text-align: center;\n      height: 80px;\n      width: 80px;\n      border-left: 1px solid gray;\n      border-right: 1px solid gray;\n      border-top: 5px solid gray;\n      border-bottom: 5px solid gray; }\n      .mainUser__info_profile_img img {\n        width: 100%;\n        height: 100%; }\n  .mainUser__info_data {\n    padding-top: 10px; }\n    .mainUser__info_data_status input {\n      border: none;\n      background-color: #EDEEF0; }\n\n.mainUser__contacts {\n  display: flex;\n  justify-content: space-between;\n  background-color: #2C8FE5;\n  padding: 5px; }\n  .mainUser__contacts_list {\n    padding: 2px; }\n  .mainUser__contacts_add_button {\n    border: none;\n    padding: 2px; }\n", ""]);
 
 // exports
 
@@ -32988,7 +32977,7 @@ module.exports = function (css) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(147);
+var content = __webpack_require__(148);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(15)(content, {});
@@ -32997,8 +32986,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./App.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./App.scss");
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./app.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./app.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33023,8 +33012,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./StartPage.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./StartPage.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./createAccount.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./createAccount.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33049,8 +33038,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./LoginStyle.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./LoginStyle.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./homepage.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./homepage.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33075,8 +33064,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Owner.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Owner.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./login.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./login.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33101,8 +33090,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Navigation.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./Navigation.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./navigation.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./navigation.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33127,8 +33116,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./CreateAcc.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./CreateAcc.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./owner.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./owner.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33153,8 +33142,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./RegStyle.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./RegStyle.scss");
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./registration.scss", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./registration.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
