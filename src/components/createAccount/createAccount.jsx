@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Button } from 'react-validation/lib/build/validation.rc.js';
 import { Link } from 'react-router-dom';
 import { createContact } from '../../services/contacts.js';
-import './CreateAcc.scss';
-
+import './createAccount.scss';
 
 export default class CreateAccount extends Component {
   constructor(props) {
@@ -16,6 +15,7 @@ export default class CreateAccount extends Component {
       password: '',
       passwordConfirm: '',
     };
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onAddNewAccount = this.onAddNewAccount.bind(this);
   }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import CreateAccount from '../registrationForm/CreateAccount.jsx';
-import './Valid.jsx';
-import './RegStyle.scss';
+import CreateAccount from '../createAccount/createAccount.jsx';
+import './valid.jsx';
+import './registration.scss';
 
-export default class RegistrationPage extends Component {
+export default class Registration extends Component {
   constructor(props) {
     super(props);
 

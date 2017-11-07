@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './ListOfNewContacts.scss';
+import './addContacts.scss';
 
 export default class SearchNewContact extends Component {
   constructor(props) {

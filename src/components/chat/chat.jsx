@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { sendMessage, getMessages, getNewMessages } from '../../services/messages.js';
 import { getFirstName } from '../../services/user.js';
-import './Chats.scss';
+import './chat.scss';
 
-export default class ChatContainer extends Component {
+export default class Chat extends Component {
   constructor(props) {
     super(props);
 
@@ -11,6 +11,7 @@ export default class ChatContainer extends Component {
       message: '',
       messages: [],
     };
+
     this.writeMessage = this.writeMessage.bind(this);
     this.sendNewMessage = this.sendNewMessage.bind(this);
     this.scrollToBottom = this.scrollToBottom.bind(this);
@@ -29,7 +30,6 @@ export default class ChatContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const currentId = this.props.match.params.chatId;
     const nextId = nextProps.match.params.chatId;
-
     if (currentId !== nextId) {
       this.getMessages(nextId);
     }
@@ -44,7 +44,7 @@ export default class ChatContainer extends Component {
   }
 
   getMessages(chatId) {
-    getMessages(chatId).then((data) => {
+    return getMessages(chatId).then((data) => {
       this.setState({
         messages: data,
       });
@@ -53,7 +53,6 @@ export default class ChatContainer extends Component {
 
   tick() {
     const { chatId } = this.props.match.params;
-
     if (this.state.messages.length === 0) {
       getNewMessages(chatId, 0).then((data) => {
         this.setState({
@@ -64,6 +63,10 @@ export default class ChatContainer extends Component {
       const lastMessage = this.state.messages[this.state.messages.length - 1];
       const lastMessageTime = lastMessage.sendTime;
       getNewMessages(chatId, lastMessageTime).then((data) => {
+        if (!data.length) {
+          return;
+        }
+        // console.log(data[0].sendTime)
         this.setState({
           messages: [...this.state.messages, ...data],
         });
@@ -86,11 +89,9 @@ export default class ChatContainer extends Component {
 
   sendNewMessage() {
     const chatId = this.props.match.params.chatId;
-
     if (this.state.message.length === 0) {
       return;
     }
-
     sendMessage(this.state, chatId);
     this.setState({
       message: '',
@@ -101,7 +102,6 @@ export default class ChatContainer extends Component {
     if (this.state.messages.length === 0) {
       return null;
     }
-
     return this.state.messages.map(message => (
       <div className="allMessages" key={message._id}>
         <div
@@ -118,6 +118,7 @@ export default class ChatContainer extends Component {
               </div>
               <div className="timeMessage">
                 {message.sendTime}
+                {/* {new Date(message.sendTime)} */}
               </div>
             </div>
           </fieldset>
@@ -167,10 +168,10 @@ export default class ChatContainer extends Component {
   }
 }
 
-ChatContainer.propTypes = {
+Chat.propTypes = {
   match: React.PropTypes.object.isRequired,
 };
 
-ChatContainer.defaultProps = {
+Chat.defaultProps = {
   onClick: () => {},
 };

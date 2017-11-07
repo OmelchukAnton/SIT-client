@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Button } from 'react-validation/lib/build/validation.rc.js';
 import { checkAccount } from '../../services/contacts.js';
-
-import './LoginStyle.scss';
+import './login.scss';
 
 class Login extends Component {
   constructor(props) {
@@ -17,21 +16,14 @@ class Login extends Component {
     this.accountVerification = this.accountVerification.bind(this);
   }
 
-  // componentWillMount() {
-  //   const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
-  //   if (Object.keys(userAuth).length !== 0) {
-  //     this.props.history.push('/pm');
-  //   }
-  //   // alert('Incorrect email or password');
-  // }
-
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
-  accountVerification() {
+  accountVerification(e) {
+    e.preventDefault();
     checkAccount(this.state).then(() => {
       this.props.history.push('/pm');
     });
@@ -42,7 +34,7 @@ class Login extends Component {
       <div>
         <div className="login">
           <fieldset className="login__fieldset">
-            <Form className="login__fieldset_form">
+            <Form onSubmit={this.accountVerification} className="login__fieldset_form">
               <div className="login__fieldset_form_info">
                 <h2> Authorization </h2>
                 <summary className="login__fieldset_form_info_summary">
@@ -69,16 +61,11 @@ class Login extends Component {
                     onChange={this.handleInputChange}
                     name="password"
                     validations={['required']}
-                    onKeyPress={(event) => {
-                      if (event.key === 'Enter') {
-                        this.accountVerification();
-                      }
-                    }}
                   />
                 </label>
               </div>
               <div>
-                <Button onClick={this.accountVerification} className="login__fieldset_form_button">
+                <Button className="login__fieldset_form_button">
                   Enter
                 </Button>
               </div>
@@ -98,14 +85,10 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  // email: React.PropTypes.string,
-  // password: React.PropTypes.string,
   history: React.PropTypes.object.isRequired,
 };
 
 Login.defaultProps = {
-  // email: '',
-  // password: '',
 };
 
 export default withRouter(Login);

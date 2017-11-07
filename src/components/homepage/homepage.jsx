@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import Login from './../login/Login.jsx';
-import './StartPage.scss';
+import Login from './../login/login.jsx';
+import './homepage.scss';
 
-export class HomePage extends Component {
+class Homepage extends Component {
 
   componentWillMount() {
     const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
     if (Object.keys(userAuth).length !== 0) {
       this.props.history.push('/pm');
     }
-    // alert('Incorrect email or password');
   }
 
   render() {
@@ -43,8 +42,8 @@ export class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
+Homepage.propTypes = {
   history: React.PropTypes.object.isRequired,
 };
 
-export default withRouter(HomePage);
+export default withRouter(Homepage);

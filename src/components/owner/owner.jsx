@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirstName, getLastName, getEmail, getUserId } from '../../services/user.js';
 import { addNewAvatar } from '../../services/contacts.js';
-import './Owner.scss';
+import './owner.scss';
 
 export default class Owner extends Component {
   constructor(props) {
@@ -21,16 +21,13 @@ export default class Owner extends Component {
 
   handleImageChange(e) {
     e.preventDefault();
-
     const reader = new FileReader();
     const file = e.target.files[0];
-
     reader.onloadend = () => {
       this.setState({
         file,
       });
     };
-
     reader.readAsDataURL(file);
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Chats.scss';
+import './chat.scss';
 
 export default class ChatWindow extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ export default class ChatWindow extends Component {
     if (!this.props.contact) {
       return <div className="chatNav"> News </div>;
     }
-
     return (
       <div className="chatNav">
         <Link to="/pm">

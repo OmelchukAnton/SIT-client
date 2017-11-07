@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { getFilterContacts } from './../../services/contacts.js';
-import ContactList from './../contacts/ContactList.jsx';
-import SearchNewContact from './SearchNewContact.jsx';
-import './ListOfNewContacts.scss';
+import ContactList from './../contacts/contactList.jsx';
+import SearchNewContact from './searchNewContact.jsx';
+import './addContacts.scss';
 
-
-export default class ListOfContacts extends Component {
+export default class AddContacts extends Component {
   constructor(props) {
     super(props);
 

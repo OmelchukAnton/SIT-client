@@ -2,26 +2,26 @@ import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { HashHistory } from 'react-history';
-import App from './components/App.jsx';
-import MainPage from './components/homepage/MainPage.jsx';
-import RegistrationPage from './components/registration/RegistrationPage.jsx';
-import ChatContainer from './components/chatBody/ChatContainer.jsx';
-import ListOfContacts from './components/addContacts/ListOfContacts.jsx';
+import App from './components/app.jsx';
+import Homepage from './components/homepage/homepage.jsx';
+import Registration from './components/registration/registration.jsx';
+import Chat from './components/chat/chat.jsx';
+import AddContacts from './components/addContacts/addContacts.jsx';
 import './index.scss';
 
 const HomeLayout = () => (
   <App>
-    <Route path="/pm/:chatId" component={ChatContainer} />
+    <Route path="/pm/:chatId" component={Chat} />
   </App>
 );
 
 render(
   <Router className="App" history={HashHistory}>
     <div>
-      <Route exact path="/" component={MainPage} />
+      <Route exact path="/" component={Homepage} />
       <Route path="/pm" component={HomeLayout} />
-      <Route path="/reg" component={RegistrationPage} />
-      <Route path="/find" component={ListOfContacts} />
+      <Route path="/reg" component={Registration} />
+      <Route path="/find" component={AddContacts} />
     </div>
   </Router>,
   document.getElementById('root'),

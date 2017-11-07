@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './Navigation.scss';
+import './navigation.scss';
 
 function onExitClick() {
   JSON.parse(localStorage.removeItem('userData') || '{}');

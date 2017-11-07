@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import ContactList from './contacts/ContactList.jsx';
-import Navigation from './navigation/Navigation.jsx';
-import Owner from './mainUser/Owner.jsx';
-import ChatWindow from './chatBody/ChatWindow.jsx';
+import ContactList from './contacts/contactList.jsx';
+import Navigation from './navigation/navigation.jsx';
+import Owner from './owner/owner.jsx';
+import ChatWindow from './chat/chatWindow.jsx';
 import { getUser } from '../services/user.js';
 import { getOwnContacts } from '../services/contacts.js';
-import './App.scss';
+import './app.scss';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+
     this.handleSearch = this.handleSearch.bind(this);
     this.onItemClick = this.onItemClick.bind(this);
     this.handleBackClick = this.handleBackClick.bind(this);

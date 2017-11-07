@@ -50,7 +50,8 @@ export function addIdNewContact(contact) {
     mainId: getUserId(),
     newContactId: contact._id,
   };
-  return api.post('/addId', datas);
+
+  return api.post('/addId', datas).then(({ data }) => data.length && data[0].chatId);
 }
 
 export function addNewAvatar(imageInfo) {
