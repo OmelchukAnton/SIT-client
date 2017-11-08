@@ -14726,7 +14726,7 @@ var Contact = function (_Component) {
             _react2.default.createElement('img', {
               className: 'view\u0421ontact__profile_avatar',
               alt: 'avatar',
-              src: 'http://localhost:5000/' + id + '.jpeg'
+              src: 'https://glacial-basin-12371.herokuapp.com/' + id + '.jpeg'
             })
           ),
           _react2.default.createElement(

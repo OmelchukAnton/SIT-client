@@ -21,7 +21,7 @@ export default class Contact extends Component {
             <img
               className="viewСontact__profile_avatar"
               alt="avatar"
-              src={`http://localhost:5000/${id}.jpeg`}
+              src={`https://glacial-basin-12371.herokuapp.com/${id}.jpeg`}
             />
           </div>
           <div>
