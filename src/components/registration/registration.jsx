@@ -21,7 +21,7 @@ export default class Registration extends Component {
             alt="example-logo"
             className="regPage__header_logo"
           />
-          <a className="regPage__header_logo" href="/">Stay in touch!</a>
+          <a className="regPage__header_logo" href="/SIT-client/#/">Stay in touch!</a>
         </div>
         <div className="form_login_and_create">
           <CreateAccount />

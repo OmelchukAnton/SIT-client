@@ -59,7 +59,7 @@ export function addNewAvatar(imageInfo) {
   formData.append('photo', imageInfo, getUserId());
 
   return (
-    fetch('http://localhost:5000/public', {
+    fetch('https://glacial-basin-12371.herokuapp.com/public', {
       method: 'POST',
       body: formData,
     })

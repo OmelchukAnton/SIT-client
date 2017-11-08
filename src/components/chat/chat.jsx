@@ -66,7 +66,7 @@ export default class Chat extends Component {
         if (!data.length) {
           return;
         }
-        // console.log(data[0].sendTime)
+        // console.log(new Date(parseInt(data[0].sendTime)).toISOString());
         this.setState({
           messages: [...this.state.messages, ...data],
         });
@@ -117,8 +117,7 @@ export default class Chat extends Component {
                 {message.text}
               </div>
               <div className="timeMessage">
-                {message.sendTime}
-                {/* {new Date(message.sendTime)} */}
+                {new Date(message.sendTime * 1).toString().slice(0, 25)}
               </div>
             </div>
           </fieldset>

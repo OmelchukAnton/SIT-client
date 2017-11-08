@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { getFirstName, getLastName, getEmail, getUserId } from '../../services/user.js';
 import { addNewAvatar } from '../../services/contacts.js';
 import './owner.scss';
 
-export default class Owner extends Component {
+class Owner extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       file: '',
     };
+  }
+
+  componentWillMount() {
+    const userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
+    if (Object.keys(userAuth).length === 0) {
+      alert('incorrect login or password');
+      this.props.history.push('/');
+    }
   }
 
   handleSubmit(e) {
@@ -32,7 +40,7 @@ export default class Owner extends Component {
   }
 
   render() {
-    const urlAva = `http://localhost:5000/${getUserId()}.jpeg`;
+    const urlAva = `https://glacial-basin-12371.herokuapp.com/${getUserId()}.jpeg`;
     return (
       <div className="mainUser">
         <div className="mainUser__info">
@@ -79,3 +87,9 @@ export default class Owner extends Component {
     );
   }
 }
+
+Owner.propTypes = {
+  history: React.PropTypes.object.isRequired,
+};
+
+export default withRouter(Owner);
