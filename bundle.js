@@ -3184,7 +3184,7 @@ function addNewAvatar(imageInfo) {
   var formData = new FormData();
   formData.append('photo', imageInfo, (0, _user.getUserId)());
 
-  return fetch('http://localhost:5000/public', {
+  return fetch('https://glacial-basin-12371.herokuapp.com/public', {
     method: 'POST',
     body: formData
   });
@@ -14032,7 +14032,7 @@ var Chat = function (_Component) {
           if (!data.length) {
             return;
           }
-          // console.log(data[0].sendTime)
+          // console.log(new Date(parseInt(data[0].sendTime)).toISOString());
           _this4.setState({
             messages: [].concat(_toConsumableArray(_this4.state.messages), _toConsumableArray(data))
           });
@@ -14105,7 +14105,7 @@ var Chat = function (_Component) {
                 _react2.default.createElement(
                   'div',
                   { className: 'timeMessage' },
-                  message.sendTime
+                  new Date(message.sendTime * 1).toString().slice(0, 25)
                 )
               )
             )
@@ -14370,7 +14370,7 @@ var Registration = function (_Component) {
           }),
           _react2.default.createElement(
             'a',
-            { className: 'regPage__header_logo', href: '/' },
+            { className: 'regPage__header_logo', href: '/SIT-client/#/' },
             'Stay in touch!'
           )
         ),
@@ -15318,6 +15318,15 @@ var Owner = function (_Component) {
   }
 
   _createClass(Owner, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var userAuth = JSON.parse(localStorage.getItem('userData') || '{}');
+      if (Object.keys(userAuth).length === 0) {
+        alert('incorrect login or password');
+        this.props.history.push('/');
+      }
+    }
+  }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -15344,7 +15353,7 @@ var Owner = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var urlAva = 'http://localhost:5000/' + (0, _user.getUserId)() + '.jpeg';
+      var urlAva = 'https://glacial-basin-12371.herokuapp.com/' + (0, _user.getUserId)() + '.jpeg';
       return _react2.default.createElement(
         'div',
         { className: 'mainUser' },
@@ -15432,7 +15441,11 @@ var Owner = function (_Component) {
   return Owner;
 }(_react.Component);
 
-exports.default = Owner;
+Owner.propTypes = {
+  history: _react2.default.PropTypes.object.isRequired
+};
+
+exports.default = (0, _reactRouterDom.withRouter)(Owner);
 
 /***/ }),
 /* 140 */
@@ -17784,7 +17797,7 @@ exports = module.exports = __webpack_require__(14)(undefined);
 
 
 // module
-exports.push([module.i, ".formCreateAcc {\n  display: flex;\n  justify-content: center;\n  background-color: #C7CFE0; }\n  .formCreateAcc h3 {\n    text-align: center;\n    font-weight: bold;\n    color: #70AF5C; }\n  .formCreateAcc__required {\n    display: flex;\n    justify-content: flex-end;\n    text-decoration: underline; }\n  .formCreateAcc__group_blocks {\n    border: 2px solid #00897B;\n    margin-bottom: 1px;\n    padding-bottom: 10px; }\n    .formCreateAcc__group_blocks_inputs {\n      border-radius: 4px;\n      border-width: 1px;\n      padding-left: 10px;\n      margin: 10px 0 10px 0px;\n      width: 300px;\n      height: 30px; }\n      .formCreateAcc__group_blocks_inputs:active {\n        border-color: blue; }\n  .formCreateAcc__buttonCreateAcc button {\n    width: 100%;\n    border: none;\n    height: 30px;\n    color: white;\n    background-color: #00897B;\n    border-radius: 3%; }\n\n.form-error {\n  color: red; }\n", ""]);
+exports.push([module.i, ".formCreateAcc {\n  display: flex;\n  justify-content: center;\n  background-color: #C7CFE0;\n  padding: 32px 0px; }\n  .formCreateAcc h3 {\n    text-align: center;\n    font-weight: bold;\n    color: #70AF5C; }\n  .formCreateAcc__required {\n    display: flex;\n    justify-content: flex-end;\n    text-decoration: underline; }\n  .formCreateAcc__group_blocks {\n    border: 2px solid #00897B;\n    margin-bottom: 1px;\n    padding-bottom: 10px; }\n    .formCreateAcc__group_blocks_inputs {\n      border-radius: 4px;\n      border-width: 1px;\n      padding-left: 10px;\n      margin: 10px 0 10px 0px;\n      width: 300px;\n      height: 30px; }\n      .formCreateAcc__group_blocks_inputs:active {\n        border-color: #e8d958; }\n  .formCreateAcc__buttonCreateAcc button {\n    width: 100%;\n    border: none;\n    height: 30px;\n    color: #FFFFFF;\n    background-color: #00897B;\n    border-radius: 3%; }\n\n.form-error {\n  color: red; }\n", ""]);
 
 // exports
 
