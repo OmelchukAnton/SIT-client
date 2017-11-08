@@ -1,4 +1,3 @@
-// const apiEndpoint = 'http://localhost:5000';
 const apiEndpoint = 'https://glacial-basin-12371.herokuapp.com';
 
 
